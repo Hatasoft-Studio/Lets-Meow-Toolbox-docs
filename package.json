@@ -3,9 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev",
-    "build": "vitepress build",
-    "preview": "vitepress preview"
+    "dev": "node scripts/vp.mjs dev",
+    "build": "node scripts/vp.mjs build",
+    "preview": "node scripts/vp.mjs preview"
   },
   "devDependencies": {
     "mermaid": "^12.2.0",
