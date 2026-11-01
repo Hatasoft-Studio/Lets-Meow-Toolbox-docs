@@ -1,6 +1,5 @@
 ---
 title: 更新日志
-description: Let's Meow! Toolbox 全部版本的更新记录，内容来自 GitHub Releases 与程序内置更新日志（Services/AppInfo.cs）。
 editLink: false
 lastUpdated: false
 ---

@@ -16,6 +16,9 @@ hero:
       text: 使用文档
       link: /docs/getting-started.html
     - theme: alt
+      text: 开发文档
+      link: /dev/introduction.html
+    - theme: alt
       text: GitHub 仓库
       link: https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox
 

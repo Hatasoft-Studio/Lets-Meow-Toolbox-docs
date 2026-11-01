@@ -1,6 +1,5 @@
 ---
 title: 特别鸣谢
-description: Let's Meow! Toolbox 的贡献者与致谢项目列表，数据来自 GitHub 仓库贡献者统计与程序内置「特别鸣谢」页面。
 editLink: false
 lastUpdated: false
 ---

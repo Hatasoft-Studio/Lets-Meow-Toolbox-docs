@@ -1,72 +1,70 @@
 ---
 title: 快速上手
-description: 下载、安装与运行 Let's Meow! Toolbox 的完整指引，内容整理自项目官方 GitHub 仓库。
 ---
 
 # 快速上手
 
-Let's Meow! Toolbox 是一个**二次元现代化 UI、新手友好的 Windows 10 / 11 一体化调优工具箱**，主程序为单文件 `LetsMeowToolbox.exe`，体积小、功能基本够用、页面简洁、说明直白。
+这一页带你从零开始，把 Let's Meow! Toolbox 下载下来并跑起来。全程不需要任何专业知识，跟着点就行。
 
-## 系统要求
+## 先看看你的电脑符不符合要求
 
-- **操作系统**：Windows 10 / 11
-- **架构**：x64（官方发布均为 `win-x64`）
-- **技术栈**：WPF · .NET 8（LTS）· C# · HandyControl（MIT）
+- **系统**：Windows 10 或 Windows 11（只支持这两个，Win7/8 不行）
+- **架构**：64 位（x64）
+- 其他没了。是否需要提前装运行库，取决于你下载哪个版本，下面会说。
 
-## 获取安装包
+## 第一步：去下载页拿安装包
 
-前往[下载页](/download.html)，页面会自动从 GitHub 拉取全部版本并生成下载链接：
+打开网站顶部的[下载](/download.html)。这个页面会**自己去 GitHub 上查询所有版本**，你不用手动找链接：
 
-- **GitHub 直连**：官方发布渠道（[GitHub Releases](https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases)）。
-- **EZ-Mirror 镜像加速**：因 GitHub.com 服务器在海外，若下载非常慢，可切换由 [EZ-Mirror](https://mirror.hatasoft365.top/) 提供的加速线路。
+- “更新通道”分两种：**Release**（正式版）和 **Pre Release**（预发布版），日常用选 Release 就行；
+- “版本”下拉框里列出了该通道下的全部版本，最新版排在最前面，也可以选更早的版本；
+- 页面会根据你的电脑，把最合适的安装包做成大按钮放在最显眼的位置；
+- 如果某个版本没有提供安装版，安装版按钮会自动隐藏，这是正常的。
+
+下载线路有两条：
+
+1. **GitHub**：官方渠道。因为 GitHub 服务器在海外，有时候下载会很慢；
+2. **EZ-Mirror 镜像**：下载慢就切到这条线路，由 [EZ-Mirror](https://mirror.hatasoft365.top/) 提供加速。
 
 <VTDocNote>
-Pre Release（预发布）版本仅支持 GitHub 下载，EZ-Mirror 镜像暂未同步预发布版本。
+Pre Release（预发布）版本**只能从 GitHub 下载**，镜像站不同步预发布版本，所以选了 Pre Release 通道时看不到线路切换。
 </VTDocNote>
 
-## 选择版本类型
+## 第二步：搞清楚两个“免安装版”的区别
 
-程序提供两种单文件发布模式：
+每个版本一般都有两个 zip，文件名很长，但区别其实很简单：
 
-| 发布模式 | 是否需要 .NET 8 桌面运行时 | 体积参考 | 适用场景 |
-| --- | --- | --- | --- |
-| 依赖运行时（framework-dependent） | 需要 | 约 10~20 MB | 机器上已安装 .NET 8 桌面运行时 |
-| 自包含（self-contained） | 不需要 | 约 90~110 MB | 全新系统，不想再装运行库 |
+| 文件名里的关键词 | 页面上叫 | 体积 | 要不要先装 .NET | 一句话解释 |
+| --- | --- | --- | --- | --- |
+| `framework-dependent` | 免安装精简版 | 小，约 10~20 MB | 要 | 本体小，但电脑里得先装好 .NET 8 桌面运行时 |
+| `self-contained` | 免安装完整版 | 大，约 90~110 MB | 不要 | 把运行库一起打包进来了，什么都不用装 |
 
-两种模式都是单文件 `LetsMeowToolbox.exe`，并附带 `plugins/` 目录，解压即用。
+不知道选哪个？**怕麻烦就选大的（免安装完整版）**，双击就能用。
+
+有的版本还会多一个 `.exe` 安装包（文件名带 `installer-version`），它本质上就是“免安装完整版”的安装包，喜欢走安装向导的可以选它。注意**不是每个版本都有安装包**，以下载页实际列出的为准。
+
+## 第三步：运行
+
+**免安装版（zip）**：
+
+1. 把 zip 解压到任意目录（比如 `D:\Tools\LetsMeowToolbox`）；
+2. 双击里面的 `LetsMeowToolbox.exe`，完事。
+
+**安装包（exe）**：双击后按向导一路下一步即可。
 
 <VTDocTip>
-若框架依赖版打不开：请先安装 [.NET 8 桌面运行时](https://dotnet.microsoft.com/download/dotnet/8.0)（选择 “.NET Desktop Runtime 8.x”）。若不想装运行库，请直接使用**自包含（self-contained）**版本，它自带运行库、双击即用。
+解压后你会看到一个 `plugins` 文件夹，那是放高危插件的地方。主程序本身不含任何高危代码，高危功能全部来自这个文件夹里的外置插件，详见[高危插件区](/docs/high-risk-zone.html)。
 </VTDocTip>
 
-部分版本还提供**安装包（installer-version）**，它就是自包含版本的安装包（例如 v0.1.1）；并非每个版本都会附带安装包，以下载页列出的实际资源为准。
+## 如果双击没反应怎么办
 
-## 运行
+十有八九是你下了“免安装精简版”但电脑里没装运行库。两个解决办法任选：
 
-<VTDocSteps>
-  <VTDocStep title="解压">
-    将下载的 zip 解压，得到 LetsMeowToolbox.exe 与 plugins 目录。
-  </VTDocStep>
-  <VTDocStep title="按需安装运行时">
-    依赖运行时版本需先安装 .NET 8 桌面运行时；自包含版本可跳过。
-  </VTDocStep>
-  <VTDocStep title="双击运行">
-    直接运行 LetsMeowToolbox.exe。主程序不含任何高危代码，高危功能仅来自 plugins 目录中的外置插件 DLL。
-  </VTDocStep>
-  <VTDocStep title="按提示确认操作">
-    所有修改、删除与清理都需要手动确认，残留与占用项默认不勾选。
-  </VTDocStep>
-</VTDocSteps>
+1. 安装 [.NET 8 桌面运行时](https://dotnet.microsoft.com/download/dotnet/8.0)（选 “.NET Desktop Runtime 8.x”），装完再打开程序；
+2. 或者直接换“免安装完整版”，自带运行库。
 
-## 日志位置
+更多情况见[常见问题](/docs/faq.html)。
 
-程序内置全局异常捕获与日志：若启动或运行出错，会弹出错误对话框并写入日志，不会“静默打不开”。
+## 顺便说一句
 
-- 日志路径：`%LocalAppData%\LetsMeowToolbox\logs\meow-日期.log`
-- 在资源管理器地址栏粘贴 `%LocalAppData%\LetsMeowToolbox\logs` 回车即可打开日志目录。
-
-## 下一步
-
-- 了解各[功能分区](/docs/features.html)的用途与边界
-- 遇到问题先查[常见问题](/docs/faq.html)
-- 查看[更新日志](/version.html)了解版本变化
+程序的所有修改、删除、清理操作**都会先问你一遍才执行**，不会偷偷自动动手；残留和占用项默认也是不勾选的，可以放心点点看。

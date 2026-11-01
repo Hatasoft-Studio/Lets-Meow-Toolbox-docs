@@ -1,17 +1,16 @@
 ---
 title: 高危插件开发
-description: 基于 LetsMeowToolbox.PluginAbstractions 契约开发高危插件：接口定义、强制规则与部署方式，内容整理自项目官方 GitHub 仓库源码。
 ---
 
 # 高危插件开发
 
-所有 🔴 高危功能**只允许以外置 DLL 插件的形式出现**：主程序本体（`LetsMeowToolbox.exe`）不包含任何高危代码，仅通过 `LetsMeowToolbox.PluginAbstractions` 定义的接口动态加载并调用插件。
+这一页讲怎么给 Let's Meow Toolbox 写一个高危插件。先重申项目的铁律：**所有高危功能只允许以外置 DLL 插件的形式出现**，主程序本体（`LetsMeowToolbox.exe`）不包含任何高危代码，仅通过 `LetsMeowToolbox.PluginAbstractions` 定义的接口动态加载并调用插件。
 
-官方参考实现为 `src/LetsMeowToolbox.Plugins.HighRisk/`（包含 `DefenderAction`、`EdgeAction`、`FirewallAction` 三个操作）。
+官方参考实现是 `src/LetsMeowToolbox.Plugins.HighRisk/`，里面有三个操作：`DefenderAction`（关闭 Defender）、`FirewallAction`（关闭防火墙）、`EdgeAction`（移除 Edge·WebView2）。看不懂契约的时候，照着它抄结构就行。
 
-## 契约一：IHighRiskPlugin
+## 契约一：IHighRiskPlugin（插件本体）
 
-插件对外契约，每个插件程序集实现一个：
+每个插件程序集实现一个 `IHighRiskPlugin`：
 
 ```csharp
 public interface IHighRiskPlugin
@@ -33,9 +32,14 @@ public interface IHighRiskPlugin
 }
 ```
 
-## 契约二：IHighRiskAction
+几个字段的用意：
 
-单个高危操作。**仅描述“做什么”，是否允许执行由用户在界面手动确认后触发，插件内禁止有任何“自动执行、自动确认、无提示”逻辑。**
+- `Description` 要求写“人话”，因为它是直接展示给普通用户看的；
+- `Credit` 会被写进程序内的「特别鸣谢」页面，请如实填写作者与项目主页。
+
+## 契约二：IHighRiskAction（单个操作）
+
+插件里的每个高危操作实现一个 `IHighRiskAction`。**接口注释里有一句必须遵守的话：仅描述“做什么”，是否允许执行由用户在界面手动确认后触发，插件内禁止有任何“自动执行、自动确认、无提示”逻辑。**
 
 ```csharp
 public interface IHighRiskAction
@@ -61,9 +65,15 @@ public interface IHighRiskAction
 }
 ```
 
-## 元数据
+方法设计的用意：
 
-`PluginMetadata.cs` 中还定义了两个辅助类型：
+- `IsAvailable()` 返回 `false` 时界面会隐藏该操作，用来处理“当前系统版本不适用”的情况；
+- `IsApplied()` 用于状态显示和还原按钮；
+- `Apply()` / `Restore()` 返回真实结果，主程序会记录日志并展示给用户。
+
+## 元数据：结果与程序集标记
+
+`PluginMetadata.cs` 里还有两个辅助类型：
 
 ```csharp
 /// 插件操作执行结果。返回给主程序用于记录日志与展示。
@@ -83,26 +93,30 @@ public sealed class HighRiskPluginAttribute : Attribute
 ## 开发步骤
 
 <VTDocSteps>
-  <VTDocStep title="引用契约工程">
-    新建类库（net8.0-windows），引用 LetsMeowToolbox.PluginAbstractions。
+  <VTDocStep title="新建类库">
+    新建一个 `net8.0-windows` 类库工程，引用 `LetsMeowToolbox.PluginAbstractions`。
   </VTDocStep>
-  <VTDocStep title="实现接口">
-    实现 IHighRiskPlugin 与若干 IHighRiskAction；为每个操作写清楚 Description 与 Warning，并按需实现 RequiresAdmin、IsAvailable、IsApplied、Apply、Restore。
+  <VTDocStep title="实现 IHighRiskPlugin">
+    填好 Id、PluginName、Description、Credit，并在 Actions 里返回你的操作列表。
+  </VTDocStep>
+  <VTDocStep title="为每个操作实现 IHighRiskAction">
+    写清楚 Description 与 Warning（这是给用户看的风险提示，别敷衍）；按需实现 RequiresAdmin、IsAvailable、IsApplied、Apply、Restore。
   </VTDocStep>
   <VTDocStep title="标记程序集">
-    在 AssemblyInfo 中添加 [assembly: HighRiskPlugin("插件名", "版本")]，便于主程序识别与展示。
+    添加 `[assembly: HighRiskPlugin("插件名", "版本")]`，便于主程序识别与展示。
   </VTDocStep>
-  <VTDocStep title="部署到 plugins 目录">
-    编译得到 DLL 后，放入主程序同级的 plugins 目录（与 LetsMeowToolbox.exe 平级），主程序会动态加载；删除 DLL 即可移除该插件。
+  <VTDocStep title="放进 plugins 目录">
+    编译出 DLL 后，放到主程序同级的 `plugins/` 目录（与 LetsMeowToolbox.exe 平级）。主程序启动时会动态加载；把 DLL 删掉就等于移除插件。
   </VTDocStep>
 </VTDocSteps>
 
-<VTDocNote>
-插件的 `Credit` 字段（作者 / 项目主页）会写入程序内「特别鸣谢」页面，请如实填写。
-</VTDocNote>
+## 强制规则（违反就别提 PR）
 
-## 强制规则
+1. 高危功能一律外置 DLL，**禁止把高危代码合入主程序**；
+2. 插件内**禁止**“自动执行、自动确认、无提示”逻辑——执行前必须由用户在界面看到 `Warning` 并二次确认；
+3. `Apply` / `Restore` 必须返回真实执行结果，供主程序记录日志与展示；
+4. 系统核心目录与系统核心进程受主程序内置黑名单保护，插件也不应绕过这类安全边界。
 
-- 高危功能一律外置 DLL，禁止把高危代码合入主程序。
-- 插件内禁止“自动执行、自动确认、无提示”逻辑；执行前必须由用户在界面二次确认（`Warning` 文案会被展示）。
-- `Apply` / `Restore` 应返回真实执行结果，供主程序记录日志与展示。
+<VTDocWarning>
+第三方高危插件由开发者自行负责。主程序只提供加载与确认框架，不为插件的行为背书。
+</VTDocWarning>
