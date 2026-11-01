@@ -1,6 +1,7 @@
 import { defineConfigWithTheme } from 'vitepress'
 import { withAppDocs } from 'vitepress-theme-app-docs/config'
 import type { ThemeConfig } from 'vitepress-theme-app-docs/config'
+import { vtdocContainerMarkdownPlugin } from './markdown/vtdoc-container-markdown'
 
 const EDIT_PATTERN =
   'https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox-docs/edit/main/:path'
@@ -200,6 +201,11 @@ export default withAppDocs(
       ['meta', { name: 'theme-color', content: '#ef5757' }],
       ['link', { rel: 'preconnect', href: 'https://api.github.com' }],
     ],
+    markdown: {
+      config(md) {
+        md.use(vtdocContainerMarkdownPlugin)
+      },
+    },
     locales: {
       root: { label: '简体中文', lang: 'zh-CN' },
       'zh-hant': {

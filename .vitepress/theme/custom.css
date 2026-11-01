@@ -22,3 +22,29 @@
   border-color: var(--vp-c-brand-1);
   transform: translateY(-2px);
 }
+
+/* 组件插槽内的 Markdown 段落不要撑出多余间距 */
+.vtd-card-body > p,
+.vtd-step-body > p,
+.vtd-accordion-body > p,
+.vtd-callout-content > p {
+  margin: 0 0 8px;
+}
+
+.vtd-card-body > p:last-child,
+.vtd-step-body > p:last-child,
+.vtd-accordion-body > p:last-child,
+.vtd-callout-content > p:last-child {
+  margin-bottom: 0;
+}
+
+.vtd-card-body > ul,
+.vtd-card-body > ol,
+.vtd-step-body > ul,
+.vtd-step-body > ol,
+.vtd-accordion-body > ul,
+.vtd-accordion-body > ol {
+  margin: 8px 0;
+  padding-left: 1.15em;
+}
+
