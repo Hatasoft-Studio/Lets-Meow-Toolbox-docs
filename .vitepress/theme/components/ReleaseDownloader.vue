@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import { useData } from 'vitepress'
 
 const REPO = 'Hatasoft-Studio/Lets-Meow-Toolbox'
 const RELEASES_PAGE = `https://github.com/${REPO}/releases`
@@ -10,6 +11,7 @@ const CACHE_TTL = 10 * 60 * 1000
 type ChannelId = 'release' | 'prerelease'
 type MirrorId = 'github' | 'proxy'
 type PlatformId = 'windows' | 'macos' | 'linux' | 'other'
+type KindId = 'installer' | 'setup' | 'full' | 'portable' | 'lite' | 'archive' | 'other'
 
 interface GhAsset {
   name: string
@@ -29,34 +31,164 @@ interface GhRelease {
 
 interface AssetInfo extends GhAsset {
   platform: PlatformId
-  kind: string
+  kind: KindId
   arch: string
 }
 
-const PLATFORM_LABELS: Record<PlatformId, string> = {
-  windows: 'Windows',
-  macos: 'macOS',
-  linux: 'Linux',
-  other: '其他',
-}
+// 组件文案多语言字典（root 为简体中文）
+const I18N = {
+  root: {
+    loading: '正在获取最新版本…',
+    errorPrefix: '无法从 GitHub 获取版本信息：',
+    retry: '重试',
+    goReleases: '前往 GitHub Releases',
+    channelLabel: '更新通道',
+    versionLabel: '版本',
+    mirrorLabel: '下载线路',
+    mirrorGithub: 'GitHub',
+    mirrorProxy: 'EZ-Mirror 镜像',
+    recommendFor: '为你的设备推荐',
+    recommend: '推荐下载',
+    downloadPrefix: '下载',
+    latest: '（最新）',
+    notePre: 'Pre Release 版本仅支持 GitHub 下载，EZ-Mirror 镜像暂未同步预发布版本。',
+    noteProxy:
+      '当前线路由 EZ-Mirror（mirror.hatasoft365.top）提供；若该版本尚未同步到镜像，请切换回 GitHub 直连。',
+    emptyPrefix: '该版本暂未上传安装包，可前往',
+    emptySuffix: '查看。',
+    noVersion: '当前通道暂无可下载的版本。',
+    channelNoteRelease: '正式发布版本，可通过 GitHub 或 EZ-Mirror 镜像下载。',
+    channelNotePre: '预发布版本，仅支持 GitHub 下载（镜像站未同步）。',
+    platforms: { windows: 'Windows', macos: 'macOS', linux: 'Linux', other: '其他' },
+    kinds: {
+      installer: '安装版',
+      setup: '安装包',
+      full: '免安装完整版',
+      portable: '便携版',
+      lite: '免安装精简版',
+      archive: '压缩包',
+      other: '其他',
+    },
+  },
+  'zh-hant': {
+    loading: '正在取得最新版本…',
+    errorPrefix: '無法從 GitHub 取得版本資訊：',
+    retry: '重試',
+    goReleases: '前往 GitHub Releases',
+    channelLabel: '更新通道',
+    versionLabel: '版本',
+    mirrorLabel: '下載線路',
+    mirrorGithub: 'GitHub',
+    mirrorProxy: 'EZ-Mirror 鏡像',
+    recommendFor: '為你的裝置推薦',
+    recommend: '推薦下載',
+    downloadPrefix: '下載',
+    latest: '（最新）',
+    notePre: 'Pre Release 版本僅支援 GitHub 下載，EZ-Mirror 鏡像暫未同步預發布版本。',
+    noteProxy:
+      '目前線路由 EZ-Mirror（mirror.hatasoft365.top）提供；若該版本尚未同步到鏡像，請切換回 GitHub 直連。',
+    emptyPrefix: '該版本暫未上傳安裝包，可前往',
+    emptySuffix: '檢視。',
+    noVersion: '目前通道暫無可下載的版本。',
+    channelNoteRelease: '正式發布版本，可透過 GitHub 或 EZ-Mirror 鏡像下載。',
+    channelNotePre: '預發布版本，僅支援 GitHub 下載（鏡像站未同步）。',
+    platforms: { windows: 'Windows', macos: 'macOS', linux: 'Linux', other: '其他' },
+    kinds: {
+      installer: '安裝版',
+      setup: '安裝包',
+      full: '免安裝完整版',
+      portable: '便攜版',
+      lite: '免安裝精簡版',
+      archive: '壓縮包',
+      other: '其他',
+    },
+  },
+  ja: {
+    loading: '最新バージョンを取得中…',
+    errorPrefix: 'GitHub からバージョン情報を取得できません：',
+    retry: '再試行',
+    goReleases: 'GitHub Releases へ',
+    channelLabel: '更新チャンネル',
+    versionLabel: 'バージョン',
+    mirrorLabel: 'ダウンロード回線',
+    mirrorGithub: 'GitHub',
+    mirrorProxy: 'EZ-Mirror ミラー',
+    recommendFor: 'あなたの環境におすすめ',
+    recommend: 'おすすめダウンロード',
+    downloadPrefix: 'ダウンロード',
+    latest: '（最新）',
+    notePre: 'Pre Release 版は GitHub からのダウンロードのみ対応です。EZ-Mirror ミラーはプレリリース版を同期していません。',
+    noteProxy:
+      '現在の回線は EZ-Mirror（mirror.hatasoft365.top）が提供しています。このバージョンがミラーに未同期の場合は、GitHub 直接接続に戻してください。',
+    emptyPrefix: 'このバージョンにはインストーラーがまだアップロードされていません。',
+    emptySuffix: 'でご確認ください。',
+    noVersion: 'このチャンネルにはダウンロード可能なバージョンがありません。',
+    channelNoteRelease: '正式リリース版。GitHub または EZ-Mirror ミラーからダウンロードできます。',
+    channelNotePre: 'プレリリース版。GitHub からのダウンロードのみ対応（ミラー未同期）。',
+    platforms: { windows: 'Windows', macos: 'macOS', linux: 'Linux', other: 'その他' },
+    kinds: {
+      installer: 'インストーラー版',
+      setup: 'インストールパッケージ',
+      full: 'ポータブル完全版',
+      portable: 'ポータブル版',
+      lite: 'ポータブル軽量版',
+      archive: 'アーカイブ',
+      other: 'その他',
+    },
+  },
+  en: {
+    loading: 'Fetching the latest release…',
+    errorPrefix: 'Could not fetch release info from GitHub:',
+    retry: 'Retry',
+    goReleases: 'Go to GitHub Releases',
+    channelLabel: 'Channel',
+    versionLabel: 'Version',
+    mirrorLabel: 'Download source',
+    mirrorGithub: 'GitHub',
+    mirrorProxy: 'EZ-Mirror',
+    recommendFor: 'Recommended for your device',
+    recommend: 'Recommended download',
+    downloadPrefix: 'Download',
+    latest: ' (latest)',
+    notePre: 'Pre Release builds are only available from GitHub; the EZ-Mirror site does not sync pre-releases.',
+    noteProxy:
+      'This source is provided by EZ-Mirror (mirror.hatasoft365.top). If this version has not been synced to the mirror yet, switch back to GitHub.',
+    emptyPrefix: 'No installer has been uploaded for this version yet. See',
+    emptySuffix: 'instead.',
+    noVersion: 'No downloadable versions in this channel yet.',
+    channelNoteRelease: 'Official releases, available from GitHub or the EZ-Mirror mirror.',
+    channelNotePre: 'Pre-release builds, GitHub only (not synced to the mirror).',
+    platforms: { windows: 'Windows', macos: 'macOS', linux: 'Linux', other: 'Other' },
+    kinds: {
+      installer: 'Installer',
+      setup: 'Setup package',
+      full: 'Portable (self-contained)',
+      portable: 'Portable',
+      lite: 'Portable (framework-dependent)',
+      archive: 'Archive',
+      other: 'Other',
+    },
+  },
+} as const
+
+type Dict = (typeof I18N)[keyof typeof I18N]
+const { localeIndex } = useData()
+const t = computed<Dict>(() => (I18N as Record<string, Dict>)[localeIndex.value] ?? I18N.root)
+
 const PLATFORM_ORDER: PlatformId[] = ['windows', 'macos', 'linux', 'other']
 
-const KIND_ORDER: Record<string, number> = {
-  安装版: 0,
-  安装包: 1,
-  免安装完整版: 2,
-  便携版: 3,
-  免安装精简版: 4,
-  压缩包: 5,
-  其他: 6,
+const KIND_ORDER: Record<KindId, number> = {
+  installer: 0,
+  setup: 1,
+  full: 2,
+  portable: 3,
+  lite: 4,
+  archive: 5,
+  other: 6,
 }
 
 // EZ-Mirror（https://mirror.hatasoft365.top）的下载入口：
 // https://mirror.hatasoft365.top/api/p/{镜像目录}/{版本号}/{文件名}
-const MIRRORS: { id: MirrorId; label: string }[] = [
-  { id: 'github', label: 'GitHub' },
-  { id: 'proxy', label: 'EZ-Mirror 镜像' },
-]
 const MIRROR_BASE = 'https://mirror.hatasoft365.top/api/p/'
 const MIRROR_DIR = "Let's Meow Toolbox"
 
@@ -85,20 +217,20 @@ function detectArch(name: string): string {
   return 'x64'
 }
 
-function detectKind(name: string): string {
+function detectKind(name: string): KindId {
   const n = name.toLowerCase()
-  if (/\.(exe|msi)$/.test(n)) return '安装版'
-  if (/\.(dmg|pkg)$/.test(n)) return '安装包'
-  if (n.endsWith('.appimage')) return '便携版'
-  if (/\.(deb|rpm)$/.test(n)) return '安装包'
+  if (/\.(exe|msi)$/.test(n)) return 'installer'
+  if (/\.(dmg|pkg)$/.test(n)) return 'setup'
+  if (n.endsWith('.appimage')) return 'portable'
+  if (/\.(deb|rpm)$/.test(n)) return 'setup'
   if (/\.(zip|7z)$/.test(n)) {
-    if (/framework-dependent|lite|slim/.test(n)) return '免安装精简版'
-    if (/self-contained|standalone|full/.test(n)) return '免安装完整版'
-    if (/portable/.test(n)) return '便携版'
-    return '压缩包'
+    if (/framework-dependent|lite|slim/.test(n)) return 'lite'
+    if (/self-contained|standalone|full/.test(n)) return 'full'
+    if (/portable/.test(n)) return 'portable'
+    return 'archive'
   }
-  if (/(\.tar\.gz|\.tgz)$/.test(n)) return '压缩包'
-  return '其他'
+  if (/(\.tar\.gz|\.tgz)$/.test(n)) return 'archive'
+  return 'other'
 }
 
 function formatDate(value: string): string {
@@ -143,14 +275,17 @@ const channelOptions = computed(() => [
 const versionOptions = computed(() =>
   channels.value[channel.value].map((r, index) => ({
     id: r.tag_name,
-    label: `${r.tag_name}${index === 0 ? '（最新）' : ''} · ${formatDate(r.published_at)}`,
+    label: `${r.tag_name}${index === 0 ? t.value.latest : ''} · ${formatDate(r.published_at)}`,
   })),
 )
 
+const mirrorOptions = computed(() => [
+  { id: 'github' as MirrorId, label: t.value.mirrorGithub },
+  { id: 'proxy' as MirrorId, label: t.value.mirrorProxy },
+])
+
 const channelNote = computed(() =>
-  channel.value === 'prerelease'
-    ? '预发布版本，仅支持 GitHub 下载（镜像站未同步）。'
-    : '正式发布版本，可通过 GitHub 或 EZ-Mirror 镜像下载。',
+  channel.value === 'prerelease' ? t.value.channelNotePre : t.value.channelNoteRelease,
 )
 
 const displayTag = computed(() => {
@@ -171,7 +306,7 @@ const parsed = computed<AssetInfo[]>(() =>
 const groups = computed(() =>
   PLATFORM_ORDER.map((platform) => ({
     id: platform,
-    label: PLATFORM_LABELS[platform],
+    label: t.value.platforms[platform],
     assets: parsed.value
       .filter((asset) => asset.platform === platform)
       .sort(
@@ -202,7 +337,7 @@ const recommendation = computed(() => {
 })
 
 const deviceLabel = computed(
-  () => `${PLATFORM_LABELS[device.value.platform]} · ${device.value.arch}`,
+  () => `${t.value.platforms[device.value.platform]} · ${device.value.arch}`,
 )
 
 function formatSize(bytes: number): string {
@@ -222,7 +357,7 @@ function assetUrl(asset: GhAsset): string {
 }
 
 function assetLabel(asset: AssetInfo): string {
-  return `${PLATFORM_LABELS[asset.platform]} ${asset.kind}`
+  return `${t.value.platforms[asset.platform]} ${t.value.kinds[asset.kind]}`
 }
 
 function readCache(): GhRelease[] | null {
@@ -304,14 +439,14 @@ onMounted(() => {
   <div class="lm-dl">
     <div v-if="loading" class="lm-dl-status">
       <span class="lm-dl-dots"><i /><i /><i /></span>
-      正在获取最新版本…
+      {{ t.loading }}
     </div>
 
     <div v-else-if="error" class="lm-dl-status lm-dl-error">
-      <p>无法从 GitHub 获取版本信息：{{ error }}</p>
+      <p>{{ t.errorPrefix }}{{ error }}</p>
       <p>
-        <button class="lm-dl-retry" type="button" @click="load(true)">重试</button>
-        <a :href="RELEASES_PAGE" target="_blank" rel="noopener">前往 GitHub Releases</a>
+        <button class="lm-dl-retry" type="button" @click="load(true)">{{ t.retry }}</button>
+        <a :href="RELEASES_PAGE" target="_blank" rel="noopener">{{ t.goReleases }}</a>
       </p>
     </div>
 
@@ -324,7 +459,7 @@ onMounted(() => {
 
         <div class="lm-dl-controls">
           <div class="lm-dl-field">
-            <label class="lm-dl-label" for="lm-channel">更新通道</label>
+            <label class="lm-dl-label" for="lm-channel">{{ t.channelLabel }}</label>
             <span class="lm-dl-select">
               <select id="lm-channel" v-model="channel">
                 <option
@@ -343,7 +478,7 @@ onMounted(() => {
           </div>
 
           <div class="lm-dl-field">
-            <label class="lm-dl-label" for="lm-version">版本</label>
+            <label class="lm-dl-label" for="lm-version">{{ t.versionLabel }}</label>
             <span class="lm-dl-select">
               <select id="lm-version" v-model="selectedTag">
                 <option v-for="item in versionOptions" :key="item.id" :value="item.id">
@@ -357,10 +492,10 @@ onMounted(() => {
           </div>
 
           <div v-if="channel === 'release'" class="lm-dl-field">
-            <label class="lm-dl-label" for="lm-mirror">下载线路</label>
+            <label class="lm-dl-label" for="lm-mirror">{{ t.mirrorLabel }}</label>
             <span class="lm-dl-select">
               <select id="lm-mirror" v-model="mirror">
-                <option v-for="item in MIRRORS" :key="item.id" :value="item.id">
+                <option v-for="item in mirrorOptions" :key="item.id" :value="item.id">
                   {{ item.label }}
                 </option>
               </select>
@@ -374,7 +509,7 @@ onMounted(() => {
 
       <div v-if="recommendation" class="lm-dl-recommend">
         <span class="lm-dl-dot" />
-        <span>{{ recommendation.matched ? '为你的设备推荐' : '推荐下载' }}</span>
+        <span>{{ recommendation.matched ? t.recommendFor : t.recommend }}</span>
         <strong>{{
           recommendation.matched ? deviceLabel : assetLabel(recommendation.choices[0])
         }}</strong>
@@ -388,7 +523,7 @@ onMounted(() => {
           :href="assetUrl(asset)"
         >
           <template v-if="index === 0">
-            下载 {{ assetLabel(asset) }} {{ formatSize(asset.size) }}
+            {{ t.downloadPrefix }} {{ assetLabel(asset) }} {{ formatSize(asset.size) }}
           </template>
           <template v-else>
             {{ assetLabel(asset) }} {{ formatSize(asset.size) }}
@@ -397,10 +532,10 @@ onMounted(() => {
       </div>
 
       <p v-if="channel === 'prerelease'" class="lm-dl-mirror-note">
-        Pre Release 版本仅支持 GitHub 下载，EZ-Mirror 镜像暂未同步预发布版本。
+        {{ t.notePre }}
       </p>
       <p v-else-if="mirror === 'proxy' && recommendation" class="lm-dl-mirror-note">
-        当前线路由 EZ-Mirror（mirror.hatasoft365.top）提供；若该版本尚未同步到镜像，请切换回 GitHub 直连。
+        {{ t.noteProxy }}
       </p>
 
       <div class="lm-dl-groups">
@@ -414,7 +549,7 @@ onMounted(() => {
           >
             <span class="lm-dl-file">{{ asset.name }}</span>
             <span class="lm-dl-meta">
-              {{ PLATFORM_LABELS[asset.platform] }} {{ asset.kind }} · {{ asset.arch }} ·
+              {{ t.platforms[asset.platform] }} {{ t.kinds[asset.kind] }} · {{ asset.arch }} ·
               {{ formatSize(asset.size) }}
             </span>
           </a>
@@ -422,13 +557,13 @@ onMounted(() => {
       </div>
 
       <p v-if="!parsed.length" class="lm-dl-empty">
-        该版本暂未上传安装包，可前往
+        {{ t.emptyPrefix }}
         <a :href="currentRelease.html_url" target="_blank" rel="noopener">GitHub Releases</a>
-        查看。
+        {{ t.emptySuffix }}
       </p>
     </template>
 
-    <div v-else class="lm-dl-status">当前通道暂无可下载的版本。</div>
+    <div v-else class="lm-dl-status">{{ t.noVersion }}</div>
   </div>
 </template>
 
