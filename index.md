@@ -43,10 +43,6 @@ features:
     details: 代码完全开源，每个版本都可追溯，欢迎参与共建。
 ---
 
-<div class="lm-cover">
-  <img src="/logo_banner.png" alt="Let's Meow! Toolbox —— 适用于 Windows 10/11 操作系统的第三方开源工具箱" />
-</div>
-
 ## 为什么选择 Let's Meow! Toolbox
 
 <VTDocCardGroup cols="3">

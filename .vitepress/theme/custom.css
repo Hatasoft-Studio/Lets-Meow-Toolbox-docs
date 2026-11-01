@@ -14,20 +14,6 @@
   opacity: 0.55;
 }
 
-/* 首页封面横幅（仓库官方 banner） */
-.lm-cover {
-  max-width: 1152px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.lm-cover img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 16px;
-}
-
 .VPHome .VPFeature {
   transition: border-color 0.25s, transform 0.25s;
 }
