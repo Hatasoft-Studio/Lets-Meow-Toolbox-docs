@@ -1,0 +1,38 @@
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #ff9a76 10%, #ef5757 55%, #d94a86 100%);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #ff9a76 30%, #ef5757 70%);
+  --vp-home-hero-image-filter: blur(48px);
+}
+
+.VPHero .name,
+.VPHero .text {
+  letter-spacing: -0.02em;
+}
+
+.VPHero .image-bg {
+  opacity: 0.55;
+}
+
+/* 首页封面横幅（仓库官方 banner） */
+.lm-cover {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.lm-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.VPHome .VPFeature {
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.VPHome .VPFeature:hover {
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-2px);
+}

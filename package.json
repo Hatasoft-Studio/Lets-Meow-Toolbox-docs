@@ -1,0 +1,16 @@
+{
+  "name": "lets-meow-toolbox-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "mermaid": "^12.2.0",
+    "vitepress": "^1.6.4",
+    "vitepress-theme-app-docs": "^1.2.0",
+    "vue": "^3.5.44"
+  }
+}
