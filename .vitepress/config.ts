@@ -19,7 +19,7 @@ interface LocaleStrings {
   docsGroup: string
   docsItems: [string, string, string, string, string, string, string, string]
   devGroup: string
-  devItems: [string, string, string, string, string]
+  devItems: [string, string, string, string, string, string]
   editText: string
   lastUpdatedText: string
   outlineLabel: string
@@ -44,6 +44,7 @@ const DEV_PATHS = [
   '/dev/build-and-publish.html',
   '/dev/project-structure.html',
   '/dev/modules-and-services.html',
+  '/dev/language-pack-development.html',
   '/dev/high-risk-plugin-development.html',
 ] as const
 
@@ -105,7 +106,7 @@ const ZH_HANT: LocaleStrings = {
     '常見問題',
   ],
   devGroup: '開發文件',
-  devItems: ['開發須知', '建構與發布', '專案結構詳解', '模組與服務速覽', '高危插件開發'],
+  devItems: ['開發須知', '建構與發布', '專案結構詳解', '模組與服務速覽', '語言包開發', '高危插件開發'],
   editText: '在 GitHub 上編輯此頁',
   lastUpdatedText: '最後編輯日期',
   outlineLabel: '本頁目錄',
@@ -142,6 +143,7 @@ const JA: LocaleStrings = {
     'ビルドとリリース',
     'プロジェクト構造詳解',
     'モジュールとサービス概覧',
+    '言語パック開発',
     '高リスクプラグイン開発',
   ],
   editText: 'このページを GitHub で編集',
@@ -180,6 +182,7 @@ const EN: LocaleStrings = {
     'Build & Publish',
     'Project Structure',
     'Modules & Services',
+    'Language Pack Development',
     'High-Risk Plugin Development',
   ],
   editText: 'Edit this page on GitHub',
@@ -195,7 +198,7 @@ export default withAppDocs(
     lang: 'zh-CN',
     title: "Let's Meow! Toolbox",
     description: '一个二次元现代化 UI、新手友好的 Windows 10 / 11 一体化调优工具箱。',
-    srcExclude: ['README.md'],
+    srcExclude: ['README.md', 'README-Program.md'],
     head: [
       ['link', { rel: 'icon', type: 'image/png', href: '/app_icon.png' }],
       ['meta', { name: 'theme-color', content: '#ef5757' }],
@@ -262,6 +265,7 @@ export default withAppDocs(
               { text: '构建与发布', link: '/dev/build-and-publish.html' },
               { text: '项目结构详解', link: '/dev/project-structure.html' },
               { text: '模块与服务速览', link: '/dev/modules-and-services.html' },
+              { text: '语言包开发', link: '/dev/language-pack-development.html' },
               { text: '高危插件开发', link: '/dev/high-risk-plugin-development.html' },
             ],
           },

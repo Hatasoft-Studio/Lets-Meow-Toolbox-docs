@@ -28,14 +28,14 @@ git clone https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox.git
 
 その後 VS で `LetsMeowToolbox.sln` を開き、F5 で `LetsMeowToolbox.App` を実行するだけです。
 
-1 つのディテール：ビルド時に**高リスクプラグインは自動的に**メインプログラム出力ディレクトリの `plugins` フォルダに**コピーされる**ため、デバッグ状態では高リスクプラグインエリアが直接使え、DLL を手動で移動する必要はありません。
+1 つのディテール：ビルド時に**高リスクプラグインは自動的に**メインプログラム出力ディレクトリの `plugins` フォルダに**コピーされる**ため、デバッグ状態では高リスクプラグインエリアが直接使え、DLL を手動で移動する必要はありません。同様に、リポジトリルートの `lang/**/*.meowlang` も出力ディレクトリの `lang/` に自動コピーされ、デバッグ時に言語管理ウィンドウで公式言語パックを直接確認できます。
 
 ## 単一ファイルリリース：2 種類のモード
 
-プログラムが外部にリリースするのは**単一ファイル**の `LetsMeowToolbox.exe` + `plugins/` ディレクトリで、2 種類のモードがあります。リポジトリの `build/` ディレクトリにはそれぞれ PowerShell スクリプトがあり、フローはどちらも 3 ステップです：
+プログラムが外部にリリースするのは**単一ファイル**の `LetsMeowToolbox.exe` + `plugins/` + `lang/` ディレクトリで、2 種類のモードがあります。リポジトリの `build/` ディレクトリにはそれぞれ PowerShell スクリプトがあり、フローはどちらも 3 ステップです：
 
 1. 古い成果物をクリーン。
-2. `dotnet publish` でメインプログラムをリリース（単一ファイル）。
+2. `dotnet publish` でメインプログラムをリリース（単一ファイル。`lang/` 言語パックは csproj が成果物に自動コピー）。
 3. 高リスクプラグインをビルドし、`LetsMeowToolbox.Plugins.HighRisk.dll` を成果物ディレクトリの `plugins/` にコピー。
 
 ### モード一：ランタイム依存（小）
@@ -44,7 +44,7 @@ git clone https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox.git
 
 ```powershell
 ./build/publish-framework-dependent.ps1
-# 产物：dist/framework-dependent/LetsMeowToolbox.exe + plugins/
+# 产物：dist/framework-dependent/LetsMeowToolbox.exe + plugins/ + lang/
 ```
 
 スクリプト内部で実際に実行されるコマンド：
@@ -60,7 +60,7 @@ dotnet publish src/LetsMeowToolbox.App/LetsMeowToolbox.App.csproj `
 
 ```powershell
 ./build/publish-self-contained.ps1
-# 产物：dist/self-contained/LetsMeowToolbox.exe + plugins/
+# 产物：dist/self-contained/LetsMeowToolbox.exe + plugins/ + lang/
 ```
 
 スクリプト内部で実際に実行されるコマンド：
@@ -85,5 +85,5 @@ dotnet publish src/LetsMeowToolbox.App/LetsMeowToolbox.App.csproj `
 - **メインプログラム名は固定**：`LetsMeowToolbox.exe`。csproj 内の `AssemblyName=LetsMeowToolbox` で決まっており、別の名前には変更できません。
 - **RID のフォールバック**：単一ファイルリリース時にコマンドラインで RID が指定されていない場合、csproj が `win-x64` をフォールバックで指定します。
 - **自包含モード**では `IncludeNativeLibrariesForSelfExtract` も同時に有効になり、ネイティブライブラリも単一ファイルにまとめられます。
-- **バージョン番号**は `LetsMeowToolbox.App.csproj` の `Version` プロパティで管理（現在 0.1.2）。新バージョンのリリース時には `Services/AppInfo.cs` 内の `Version` と `Changelog` の同期更新を忘れないでください。
+- **バージョン番号**は `LetsMeowToolbox.App.csproj` の `Version` プロパティで管理（現在 0.2.0）。新バージョンのリリース時には `Services/AppInfo.cs` 内の `Version` と `Changelog` の同期更新を忘れないでください。
 </VTDocTip>

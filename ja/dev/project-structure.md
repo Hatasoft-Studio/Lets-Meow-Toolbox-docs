@@ -20,6 +20,7 @@ LetsMeowToolbox/
 ├── build/
 │   ├── publish-framework-dependent.ps1   # 单文件·依赖运行时
 │   └── publish-self-contained.ps1        # 单文件·自包含
+├── lang/                                  # 外置语言包（官方：zh-Hant / ja / en）
 ├── src/
 │   ├── LetsMeowToolbox.App/               # 主程序 (LetsMeowToolbox.exe)
 │   ├── LetsMeowToolbox.PluginAbstractions/# 插件契约接口
@@ -43,9 +44,10 @@ LetsMeowToolbox/
 | ディレクトリ | 格納内容 |
 | --- | --- |
 | `Modules/` | 機能モジュール。エリア別に構成：`Beginner/`（初心者エリア 5 モジュール）、`Advanced/`（上級エリア）、`Uninstaller/`（アンインストール）、`Unlock/`（占用解除） |
-| `Services/` | グローバルサービス：権限、ログ、構成、設定、テーマ、プラグイン読み込みなど（次ページで一つずつ紹介） |
+| `Services/` | グローバルサービス：権限、ログ、構成、設定、テーマ、プラグイン読み込み、多言語（`LocalizationService` / `LanguagePackInstaller`）、更新確認（`UpdateService`）など（次ページで一つずつ紹介） |
+| `Localization/` | 組み込みソース言語ファイル `zh-Hans.meowlang`（簡体字中国語、`EmbeddedResource` としてパッケージ） |
 | `Utils/` | 低レベルユーティリティ：コマンド実行、レジストリ、プロセス、Win32 ネイティブ機能のラップ |
-| `Views/` | 画面：各エリアのページ、ダイアログ（更新履歴、ライセンス契約、Fluent ダイアログ） |
+| `Views/` | 画面：各エリアのページ、ダイアログ（更新履歴、ライセンス契約、Fluent ダイアログ、更新プロンプト、言語管理と言語パックインストール） |
 | `Themes/` | テーマリソースディクショナリ：`Brushes.Light.xaml`、`Brushes.Anime.xaml`、`FluentStyles.xaml` |
 | `Models/` | ビューモデルとデータモデル（`ObservableObject`、各ページの ViewModel） |
 | `Assets/` | アイコン、ロゴ、壁紙、GPL-3.0 ライセンス全文 |
@@ -61,7 +63,7 @@ LetsMeowToolbox/
 | `TargetFramework` | `net8.0-windows` | .NET 8、Windows デスクトップ |
 | `UseWPF` | `true` | WPF アプリ |
 | `AssemblyName` | `LetsMeowToolbox` | メインプログラム名は `LetsMeowToolbox.exe` に固定 |
-| `Version` | `0.1.2` | v0.1.1 からバージョン番号体系を启用。更新履歴は `Services/AppInfo.cs` を参照 |
+| `Version` | `0.2.0` | v0.1.1 からバージョン番号体系を有効化。更新履歴は `Services/AppInfo.cs` を参照 |
 | `ApplicationManifest` | `app.manifest` | アプリケーションマニフェスト |
 | `AllowUnsafeBlocks` | `true` | unsafe コードブロックを許可 |
 | `PackageReference` | `HandyControl 3.5.1` | 唯一の NuGet 依存。UI コントロールライブラリ |
@@ -70,7 +72,9 @@ LetsMeowToolbox/
 
 - **埋め込みリソース**（単一ファイルにパッケージされ、exe と一緒に出力する必要なし）：`logo_banner.png`、`app_icon.png`、`app.ico`。
 - **埋め込みリソース**：`gpl-3.0.txt`（初回起動時のライセンス契約ダイアログとバージョン情報ページで使用）。
+- **組み込みソース言語**：`Localization/zh-Hans.meowlang`（簡体字中国語、`EmbeddedResource`。外部言語パックが一つもない場合でも正常に表示）。
 - **ルーズファイル**（プログラムと共に exe と同じディレクトリに出力され、実行時にディスクから読み込み）：`wallpaper.png`（二次元化壁紙）。
+- **外部言語パック**：リポジトリルートの `lang/**/*.meowlang` を `None Include` 方式で出力ディレクトリの `lang/` にコピーし、`dotnet publish` 時にも同様に保持（`CopyToPublishDirectory=PreserveNewest`）。
 - **任意ディレクトリ**：`assets/` ディレクトリが存在する場合、ディレクトリ全体が出力と一緒にコピーされます。
 
 単一ファイルリリース関連：RID が明示的に指定されておらず `PublishSingleFile` が有効な場合、csproj は `win-x64` をフォールバック。自包含（`SelfContained=true`）時は `IncludeNativeLibrariesForSelfExtract` を有効化。

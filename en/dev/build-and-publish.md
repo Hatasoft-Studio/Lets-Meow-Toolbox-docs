@@ -28,14 +28,14 @@ git clone https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox.git
 
 Then open `LetsMeowToolbox.sln` in VS and press F5 to run `LetsMeowToolbox.App`.
 
-One detail: during build, **the high-risk plugin is automatically copied** into the `plugins` folder of the main program's output directory, so the high-risk plugin zone is directly usable in debug mode — no need to move DLLs manually.
+One detail: during build, **the high-risk plugin is automatically copied** into the `plugins` folder of the main program's output directory, so the high-risk plugin zone is directly usable in debug mode — no need to move DLLs manually. Likewise, `lang/**/*.meowlang` at the repository root is also copied automatically to the output directory's `lang/`, so the official language packs are visible directly in the Language Manager window while debugging.
 
 ## Single-File Publishing: Two Modes
 
-What the program publishes externally is a **single file** `LetsMeowToolbox.exe` + `plugins/` directory, in two modes. The repository's `build/` directory contains one PowerShell script for each; both flows have three steps:
+What the program publishes externally is a **single file** `LetsMeowToolbox.exe` + `plugins/` + `lang/` directories, in two modes. The repository's `build/` directory contains one PowerShell script for each; both flows have three steps:
 
 1. Clean old artifacts;
-2. `dotnet publish` to publish the main program (single file);
+2. `dotnet publish` to publish the main program (single file; `lang/` language packs are copied into the artifacts automatically by the csproj);
 3. Build the high-risk plugin and copy `LetsMeowToolbox.Plugins.HighRisk.dll` into the artifact directory's `plugins/`.
 
 ### Mode 1: Framework-Dependent (Small)
@@ -44,7 +44,7 @@ The target machine needs the .NET 8 Desktop Runtime installed first; artifacts a
 
 ```powershell
 ./build/publish-framework-dependent.ps1
-# 产物：dist/framework-dependent/LetsMeowToolbox.exe + plugins/
+# 产物：dist/framework-dependent/LetsMeowToolbox.exe + plugins/ + lang/
 ```
 
 The command actually executed inside the script:
@@ -60,7 +60,7 @@ The entire runtime is packaged in; the target machine needs nothing installed; a
 
 ```powershell
 ./build/publish-self-contained.ps1
-# 产物：dist/self-contained/LetsMeowToolbox.exe + plugins/
+# 产物：dist/self-contained/LetsMeowToolbox.exe + plugins/ + lang/
 ```
 
 The command actually executed inside the script:
@@ -85,5 +85,5 @@ If you don't want to use the scripts, manually execute the two `dotnet publish` 
 - **The main program name is fixed**: `LetsMeowToolbox.exe`, determined by `AssemblyName=LetsMeowToolbox` in the csproj — don't expect to change it to anything else;
 - **RID fallback**: if no RID is given on the command line during single-file publishing, the csproj falls back to `win-x64`;
 - **Self-contained mode** also enables `IncludeNativeLibrariesForSelfExtract`, packing native libraries into the single file as well;
-- **The version number** is maintained in the `Version` property of `LetsMeowToolbox.App.csproj` (currently 0.1.2); when releasing a new version, don't forget to also update `Version` and `Changelog` in `Services/AppInfo.cs` in sync.
+- **The version number** is maintained in the `Version` property of `LetsMeowToolbox.App.csproj` (currently 0.2.0); when releasing a new version, don't forget to also update `Version` and `Changelog` in `Services/AppInfo.cs` in sync.
 </VTDocTip>

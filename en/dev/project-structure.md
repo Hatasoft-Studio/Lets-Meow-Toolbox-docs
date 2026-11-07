@@ -20,6 +20,7 @@ LetsMeowToolbox/
 ├── build/
 │   ├── publish-framework-dependent.ps1   # 单文件·依赖运行时
 │   └── publish-self-contained.ps1        # 单文件·自包含
+├── lang/                                  # 外置语言包（官方：zh-Hant / ja / en）
 ├── src/
 │   ├── LetsMeowToolbox.App/               # 主程序 (LetsMeowToolbox.exe)
 │   ├── LetsMeowToolbox.PluginAbstractions/# 插件契约接口
@@ -43,9 +44,10 @@ The internal directories and responsibilities of `src/LetsMeowToolbox.App/`:
 | Directory | What's Inside |
 | --- | --- |
 | `Modules/` | Feature modules, organized by zone: `Beginner/` (5 modules in the Beginner Zone), `Advanced/` (Advanced Zone), `Uninstaller/` (uninstall), `Unlock/` (unlock) |
-| `Services/` | Global services: permissions, logging, configuration, settings, themes, plugin loading, etc. (named one by one on the next page) |
+| `Services/` | Global services: permissions, logging, configuration, settings, themes, plugin loading, multilingual support (`LocalizationService` / `LanguagePackInstaller`), update checking (`UpdateService`), etc. (named one by one on the next page) |
+| `Localization/` | The embedded source language file `zh-Hans.meowlang` (Simplified Chinese, packaged as an `EmbeddedResource`) |
 | `Utils/` | Low-level utilities: command execution, registry, processes, Win32 native capability wrappers |
-| `Views/` | UI: pages for each zone, dialogs (changelog, license, Fluent dialog) |
+| `Views/` | UI: pages for each zone, dialogs (changelog, license, Fluent dialog, update prompt, language manager and language pack installation) |
 | `Themes/` | Theme resource dictionaries: `Brushes.Light.xaml`, `Brushes.Anime.xaml`, `FluentStyles.xaml` |
 | `Models/` | View models and data models (`ObservableObject`, ViewModels for each page) |
 | `Assets/` | Icons, logo, wallpaper, full GPL-3.0 license text |
@@ -61,7 +63,7 @@ Noteworthy configurations in `LetsMeowToolbox.App.csproj`:
 | `TargetFramework` | `net8.0-windows` | .NET 8, Windows desktop |
 | `UseWPF` | `true` | WPF app |
 | `AssemblyName` | `LetsMeowToolbox` | The main program name is fixed to `LetsMeowToolbox.exe` |
-| `Version` | `0.1.2` | Versioning scheme enabled since v0.1.1; the changelog lives in `Services/AppInfo.cs` |
+| `Version` | `0.2.0` | Versioning scheme enabled since v0.1.1; the changelog lives in `Services/AppInfo.cs` |
 | `ApplicationManifest` | `app.manifest` | Application manifest |
 | `AllowUnsafeBlocks` | `true` | Unsafe code blocks allowed |
 | `PackageReference` | `HandyControl 3.5.1` | The only NuGet dependency, a UI control library |
@@ -70,7 +72,9 @@ The resource packaging is also worth noting:
 
 - **Embedded resources** (packed into the single file, no need to output alongside the exe): `logo_banner.png`, `app_icon.png`, `app.ico`;
 - **Embedded resource**: `gpl-3.0.txt` (used by the first-launch license dialog and the About page);
+- **Embedded source language**: `Localization/zh-Hans.meowlang` (Simplified Chinese, `EmbeddedResource` — displays normally even with no external language pack at all);
 - **Loose file** (output alongside the program to the exe's directory, loaded from disk at runtime): `wallpaper.png` (the anime-mode wallpaper);
+- **External language packs**: `lang/**/*.meowlang` at the repository root is copied to the output directory's `lang/` via `None Include`, and is likewise preserved during `dotnet publish` (`CopyToPublishDirectory=PreserveNewest`);
 - **Optional directory**: when an `assets/` directory exists, the whole directory is copied with the output.
 
 Single-file publishing related: when no RID is explicitly specified and `PublishSingleFile` is enabled, the csproj falls back to `win-x64`; when self-contained (`SelfContained=true`), `IncludeNativeLibrariesForSelfExtract` is enabled.

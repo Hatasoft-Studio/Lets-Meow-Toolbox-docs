@@ -19,7 +19,7 @@ Features in the program are not thrown together in a pile; they are divided into
 | 📦 Uninstaller | Standalone page | Batch Win32 software uninstall, leftover scan and cleanup, cleanup report export, linked with "Unlock" |
 | 🔓 Unlock | Standalone page | Find locking processes, close programs to release locks, delayed delete on boot |
 | 🔴 High-Risk Plugin Zone | External DLL plugins | Disable Defender / Disable Firewall / Remove Edge·WebView2. The main program itself contains no high-risk code; it only dynamically loads plugin DLLs under the `plugins` directory |
-| ⚙️ Settings | Standalone page | Appearance, import/export of configuration presets, log directory, one-click initialize everything, About and changelog |
+| ⚙️ Settings | Standalone page | Language pack selection and installation, check for updates, appearance, import/export of configuration presets, log directory, one-click initialize everything, About and changelog |
 | 💖 Special Thanks | Standalone page | Other open source projects integrated into this project |
 
 ## Why It's Divided This Way
@@ -28,6 +28,15 @@ Features in the program are not thrown together in a pile; they are divided into
 - Operations in the **Advanced Zone** have a bigger impact (e.g. touching Windows Update), so you must check the risk warning before they unlock;
 - Since v0.1.1, **Uninstaller** and **Unlock** have been split out of their original zones, each becoming an independent navigation category and standalone page — more comfortable to use;
 - The **High-Risk Plugin Zone** is the most special: these features (disabling Defender, removing Edge, and the like) are high-risk, so the author made them all **external plugins** — the main program itself has not a single line of high-risk code. If you don't use the plugins, the program simply doesn't contain these features at all.
+
+## New in v0.2.0: Multilingual Support and Software Updates
+
+Both capabilities live on the Settings page and don't take up zones of their own:
+
+- **Language**: Simplified Chinese is embedded in the program itself; Traditional Chinese, Japanese, English and others are stored as `.meowlang` language packs in the `lang` directory, and can be selected and installed with one click — after loading, the program restarts automatically to take effect;
+- **Software Updates**: the Settings page can "Check for updates"; when a new version exists, the version number and update content are shown; if the current version has been officially marked as unsupported, updating is mandatory at startup.
+
+For detailed operations and the language pack format, see [Settings and About](/en/docs/settings.html).
 
 ## The Safety Baseline All Zones Follow
 

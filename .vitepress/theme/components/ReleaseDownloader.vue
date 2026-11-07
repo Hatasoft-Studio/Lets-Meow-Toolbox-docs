@@ -242,7 +242,10 @@ function formatDate(value: string): string {
 }
 
 const channels = computed<Record<ChannelId, GhRelease[]>>(() => {
-  const list = releases.value.filter((r) => !r.draft)
+  // 语言包等非程序本体发布（例如 v1.1.0-lang）不进入程序下载列表
+  const list = releases.value.filter(
+    (r) => !r.draft && r.assets.some((a) => /\.(zip|7z|exe|msi)$/i.test(a.name)),
+  )
   return {
     release: list.filter((r) => !r.prerelease),
     prerelease: list.filter((r) => r.prerelease),

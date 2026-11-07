@@ -46,6 +46,32 @@ title: 常見問題
   </VTDocAccordion>
 </VTDocAccordionGroup>
 
+## 語言與更新（v0.2.0 起）
+
+<VTDocAccordionGroup>
+  <VTDocAccordion title="找不到「選擇語言」按鈕">
+    語言卡片在「設定」頁最上面。如果 `lang` 目錄裡一個外置語言包都沒有，程式仍然預設使用內嵌的簡體中文；把官方語言包（或第三方 `.meowlang`）放進程式同級的 `lang` 目錄後重新啟動程式，列表裡就會出現。
+  </VTDocAccordion>
+  <VTDocAccordion title="切換語言後程式自己重新啟動了">
+    這是正常設計。點「載入所選語言」並確認後，程式會重新啟動一次，讓所有介面文字按新語言重新翻譯；重新啟動失敗時才會提示錯誤並寫記錄。
+  </VTDocAccordion>
+  <VTDocAccordion title="語言包裝不上，提示版本不適用">
+    語言包裡的 `appVersion` 只允許用在指定版本上，例如 `0.2.0 | 0.2.1` 或 `>=0.2.0`。請換成適配當前版本的語言包，或者升級主程式。具體規則見[設定與關於](/zh-hant/docs/settings.html)。
+  </VTDocAccordion>
+  <VTDocAccordion title="提示同名語言包作者不一致，無法安裝">
+    程式發現 `lang` 目錄裡已有同 ID 的語言包，但作者或作者網站不同，為了防止覆蓋，安裝會被拒絕。到 `lang` 目錄手動刪除舊的 `.meowlang` 檔案，再重新安裝即可。
+  </VTDocAccordion>
+  <VTDocAccordion title="官方語言包怎麼分辨">
+    語言包詳情裡，官方語言包的製作者旁邊會顯示**綠色盾牌標識**；程式判定官方需要同時滿足製作者為 `Hatasoft-Studio`、作者網站為官方站點。第三方語言包安裝時還會額外彈一次確認。
+  </VTDocAccordion>
+  <VTDocAccordion title="點「檢查更新」顯示檢查失敗">
+    檢查更新需要存取官方更新介面，網路不通、被防火牆攔截或介面臨時異常都會失敗。可以稍後重試；失敗不影響程式其他功能。若一直失敗，請到 GitHub 儲存庫提 Issue。
+  </VTDocAccordion>
+  <VTDocAccordion title="啟動時彈出「此版本已停止支援」">
+    說明官方已經把當前版本列入停止支援列表，更新前無法繼續使用。點「前往官網取得新版本」下載最新版；點「結束程式」則直接結束。更新後即可正常使用。
+  </VTDocAccordion>
+</VTDocAccordionGroup>
+
 ## 下載相關
 
 <VTDocAccordionGroup>
@@ -53,7 +79,7 @@ title: 常見問題
     GitHub 的伺服器在海外，直連慢是正常的。到下載頁把「下載線路」切換為 EZ-Mirror 鏡像即可加速（Pre Release 版本除外，鏡像站不同步預發布版本）。
   </VTDocAccordion>
   <VTDocAccordion title="找不到安裝版（.exe 安裝包）">
-    不是每個版本都提供安裝版。例如 v0.1.1 有 installer-version 安裝包，v0.1.2 就暫時沒有。以下載頁列出的實際資源為準；沒有安裝版時，用「免安裝完整版」解壓縮即用，體驗是一樣的。
+    不是每個版本都提供安裝版。例如 v0.1.1 有 installer-version 安裝包，v0.1.2 和 v0.2.0 就暫時沒有。以下載頁列出的實際資源為準；沒有安裝版時，用「免安裝完整版」解壓縮即用，體驗是一樣的。
   </VTDocAccordion>
 </VTDocAccordionGroup>
 

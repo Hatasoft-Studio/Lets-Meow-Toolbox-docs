@@ -30,13 +30,13 @@ The program offers two single-file publishing modes; the "Portable Lite" and "Po
 | Framework-dependent | Yes | About 10~20 MB | The machine already has the .NET 8 Desktop Runtime installed |
 | Self-contained | No | About 90~110 MB | A brand-new system; you don't want to install any runtime |
 
-Both modes are a single file `LetsMeowToolbox.exe` accompanied by a `plugins/` directory — extract and use. The file sizes shown on the page are subject to the actual artifacts of the GitHub Release.
+Both modes are a single file `LetsMeowToolbox.exe` accompanied by a `plugins/` (high-risk plugins) and a `lang/` (language packs) directory — extract and use. The file sizes shown on the page are subject to the actual artifacts of the GitHub Release.
 
 ## Installation and First Run
 
 <VTDocSteps>
   <VTDocStep title="Download and Extract">
-    Download the zip of the corresponding version from the list above; after extracting you get LetsMeowToolbox.exe and the plugins directory.
+    Download the zip of the corresponding version from the list above; after extracting you get LetsMeowToolbox.exe plus the plugins and lang directories.
   </VTDocStep>
   <VTDocStep title="Install the Runtime If Needed">
     If you choose the "Portable Lite", please install the .NET 8 Desktop Runtime (.NET Desktop Runtime 8.x) first; the "Portable Full" ships with the runtime and can skip this step.
@@ -85,6 +85,9 @@ Both modes are a single file `LetsMeowToolbox.exe` accompanied by a `plugins/` d
   <VTDocAccordion title="The high-risk plugin zone is empty">
     The main program itself contains no high-risk code; high-risk plugins are only loaded after you place their DLLs into the plugins directory alongside the program.
   </VTDocAccordion>
+  <VTDocAccordion title="I want a Traditional Chinese / Japanese / English interface">
+    The official language packs already ship in the v0.2.0 archive, in the lang directory. Open Settings → "Language" → "Select Language", pick the language and click "Load Selected Language"; the program restarts automatically to apply it. See [Settings and About](/en/docs/settings.html) for details.
+  </VTDocAccordion>
 </VTDocAccordionGroup>
 
 ## Other Ways to Get It
@@ -101,6 +104,9 @@ Both modes are a single file `LetsMeowToolbox.exe` accompanied by a `plugins/` d
   </VTDocCard>
   <VTDocCard title=".NET 8 Desktop Runtime" icon="rocket" href="https://dotnet.microsoft.com/download/dotnet/8.0">
     Before using the framework-dependent version, download and install .NET Desktop Runtime 8.x here.
+  </VTDocCard>
+  <VTDocCard title="Official Language Pack (External Language Pack)" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v1.1.0-lang">
+    A separate release page for the Traditional Chinese, Japanese and English language packs; download the .meowlang file and use "Install Language Pack" inside the program. When released together with the main program package, they are already in the lang directory.
   </VTDocCard>
 </VTDocCardGroup>
 

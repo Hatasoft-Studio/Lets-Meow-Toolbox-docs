@@ -52,12 +52,15 @@ title: 模块与服务速览
 | `ConfigService.cs` | 配置读写 |
 | `FeatureHost.cs` | 功能宿主：承载各功能项的执行入口 |
 | `FluentToast.cs` | Fluent 风格的通知提示 |
+| `LanguagePackInstaller.cs` | 语言包读取校验、适用版本判断、版本比较、安装到 `lang` 目录与重启程序（v0.2.0） |
+| `LocalizationService.cs` | 多语言：扫描 `lang` 目录、加载 `.meowlang`、按原文翻译并遍历可视树替换文本（v0.2.0） |
 | `LogService.cs` | 全局日志（INFO / WARN / ERROR），写到 `%LocalAppData%\LetsMeowToolbox\logs` |
 | `OsVersionService.cs` | 系统版本检测（Win10 / Win11 差异处理会用到） |
 | `PluginLoader.cs` | 高危插件加载器：扫描并动态加载 `plugins/` 目录下的插件 DLL |
 | `SettingsService.cs` | 设置项管理 |
 | `ThemeService.cs` | 主题切换（浅色 / 二次元模式等） |
 | `Ui.cs` | 界面交互封装（弹窗、错误提示等） |
+| `UpdateService.cs` | 更新检查：请求官方更新接口，返回最新版本、下载地址、停止支持列表与更新说明（v0.2.0） |
 
 ## 工具类（Utils/）
 
@@ -85,7 +88,7 @@ title: 模块与服务速览
 
 ## 界面（Views/）速查
 
-页面与分区基本一一对应：`BeginnerView`（新手区）、`AdvancedView`（高级区）、`UninstallerView` + `UninstallerPanel`（卸载程序）、`UnlockView` + `UnlockPanel`（解除占用）、`HighRiskView`（高危插件区）、`SettingsView`（设置）、`CreditsView`（特别鸣谢）。对话框类：`ChangelogDialog`（更新日志）、`LicenseDialog`（首次启动协议）、`FluentDialog`。
+页面与分区基本一一对应：`BeginnerView`（新手区）、`AdvancedView`（高级区）、`UninstallerView` + `UninstallerPanel`（卸载程序）、`UnlockView` + `UnlockPanel`（解除占用）、`HighRiskView`（高危插件区）、`SettingsView`（设置，含语言与更新卡片）、`CreditsView`（特别鸣谢）。对话框类：`ChangelogDialog`（更新日志）、`LicenseDialog`（首次启动协议）、`FluentDialog`、`UpdateDialog`（发现新版本 / 停止支持强制更新）、`LanguageManagerDialog`（语言管理）、`LanguagePackDetailsDialog`（语言包详情）、`LanguageInstallProgressDialog`（安装进度）。
 
 <VTDocTip>
 读源码的推荐路线：先看 `Views/` 找到界面入口 → 跳到对应 `Modules/` 看逻辑 → 遇到底层操作再看 `Utils/`。服务层（`Services/`）在哪里都会被碰到，不用专门通读。

@@ -16,6 +16,7 @@ LetsMeowToolbox/
 ├── build/
 │   ├── publish-framework-dependent.ps1   # 单文件·依赖运行时
 │   └── publish-self-contained.ps1        # 单文件·自包含
+├── lang/                                  # 外置语言包（官方：zh-Hant / ja / en）
 ├── src/
 │   ├── LetsMeowToolbox.App/               # 主程序 (LetsMeowToolbox.exe)
 │   ├── LetsMeowToolbox.PluginAbstractions/# 插件契约接口
@@ -39,9 +40,10 @@ LetsMeowToolbox/
 | 目录 | 放什么 |
 | --- | --- |
 | `Modules/` | 功能模块，按分区组织：`Beginner/`（新手区 5 个模块）、`Advanced/`（高级区）、`Uninstaller/`（卸载）、`Unlock/`（解除占用） |
-| `Services/` | 全局服务：权限、日志、配置、设置、主题、插件加载等（下一页逐个点名） |
+| `Services/` | 全局服务：权限、日志、配置、设置、主题、插件加载、多语言（`LocalizationService` / `LanguagePackInstaller`）、更新检查（`UpdateService`）等（下一页逐个点名） |
+| `Localization/` | 内嵌的源语言文件 `zh-Hans.meowlang`（简体中文，作为 `EmbeddedResource` 打包） |
 | `Utils/` | 底层工具：命令执行、注册表、进程、Win32 原生能力封装 |
-| `Views/` | 界面：各分区页面、对话框（更新日志、协议、Fluent 对话框） |
+| `Views/` | 界面：各分区页面、对话框（更新日志、协议、Fluent 对话框、更新提示、语言管理与语言包安装） |
 | `Themes/` | 主题资源字典：`Brushes.Light.xaml`、`Brushes.Anime.xaml`、`FluentStyles.xaml` |
 | `Models/` | 视图模型与数据模型（`ObservableObject`、各页面的 ViewModel） |
 | `Assets/` | 图标、logo、壁纸、GPL-3.0 协议全文 |
@@ -57,7 +59,7 @@ LetsMeowToolbox/
 | `TargetFramework` | `net8.0-windows` | .NET 8，Windows 桌面 |
 | `UseWPF` | `true` | WPF 应用 |
 | `AssemblyName` | `LetsMeowToolbox` | 主程序名固定为 `LetsMeowToolbox.exe` |
-| `Version` | `0.1.2` | v0.1.1 起启用版本号体系，更新日志见 `Services/AppInfo.cs` |
+| `Version` | `0.2.0` | v0.1.1 起启用版本号体系，更新日志见 `Services/AppInfo.cs` |
 | `ApplicationManifest` | `app.manifest` | 应用清单 |
 | `AllowUnsafeBlocks` | `true` | 允许 unsafe 代码块 |
 | `PackageReference` | `HandyControl 3.5.1` | 唯一的 NuGet 依赖，UI 控件库 |
@@ -66,7 +68,9 @@ LetsMeowToolbox/
 
 - **嵌入资源**（打包进单文件，不需要随 exe 输出）：`logo_banner.png`、`app_icon.png`、`app.ico`；
 - **嵌入资源**：`gpl-3.0.txt`（首次启动协议弹窗与关于页使用）；
+- **内嵌源语言**：`Localization/zh-Hans.meowlang`（简体中文，`EmbeddedResource`，即使没有任何外置语言包也能正常显示）；
 - **松文件**（随程序输出到 exe 同目录，运行时从磁盘加载）：`wallpaper.png`（二次元化壁纸）；
+- **外置语言包**：仓库根目录 `lang/**/*.meowlang` 以 `None Include` 方式复制到输出目录的 `lang/`，`dotnet publish` 时同样保留（`CopyToPublishDirectory=PreserveNewest`）；
 - **可选目录**：存在 `assets/` 目录时，整个目录随输出复制。
 
 单文件发布相关：未显式指定 RID 且开启了 `PublishSingleFile` 时，csproj 兜底 `win-x64`；自包含（`SelfContained=true`）时开启 `IncludeNativeLibrariesForSelfExtract`。

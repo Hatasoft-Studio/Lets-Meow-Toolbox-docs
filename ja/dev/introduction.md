@@ -54,7 +54,8 @@ title: 開発の心得
 1. [ビルドとリリース](/ja/dev/build-and-publish.html)：どんな環境を入れるか、どう動かすか、どう単一ファイルにパッケージするか。
 2. [プロジェクト構造の詳細](/ja/dev/project-structure.html)：ソリューション内の 3 つのプロジェクトがそれぞれ何をするか、メインプログラム内部の階層構造。
 3. [モジュールとサービスの概要](/ja/dev/modules-and-services.html)：機能モジュール、サービス、ユーティリティクラスを一つずつ紹介。
-4. [高リスクプラグイン開発](/ja/dev/high-risk-plugin-development.html)：プラグイン契約インターフェースと開発手順。
+4. [言語パック開発](/ja/dev/language-pack-development.html)：`.meowlang` の形式、検証とインストールの流れ、翻訳の仕組み、更新インターフェース。
+5. [高リスクプラグイン開発](/ja/dev/high-risk-plugin-development.html)：プラグイン契約インターフェースと開発手順。
 
 ## 最後にもう一度注意
 

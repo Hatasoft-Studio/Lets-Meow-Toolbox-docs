@@ -56,12 +56,15 @@ title: モジュールとサービスの概要
 | `ConfigService.cs` | 構成の読み書き |
 | `FeatureHost.cs` | 機能ホスト：各機能項目の実行エントリーポイントを保持 |
 | `FluentToast.cs` | Fluent スタイルの通知トースト |
+| `LanguagePackInstaller.cs` | 言語パックの読み込み検証、適用バージョン判定、バージョン比較、`lang` ディレクトリへのインストールとプログラムの再起動（v0.2.0） |
+| `LocalizationService.cs` | 多言語：`lang` ディレクトリのスキャン、`.meowlang` の読み込み、原文に基づく翻訳とビジュアルツリーを走査してテキストを置換（v0.2.0） |
 | `LogService.cs` | グローバルログ（INFO / WARN / ERROR）、`%LocalAppData%\LetsMeowToolbox\logs` に書き込み |
 | `OsVersionService.cs` | システムバージョン検出（Win10 / Win11 の差異処理で使用） |
 | `PluginLoader.cs` | 高リスクプラグインローダー：`plugins/` ディレクトリ内のプラグイン DLL をスキャンして動的に読み込み |
 | `SettingsService.cs` | 設定項目の管理 |
 | `ThemeService.cs` | テーマ切り替え（ライト / 二次元モードなど） |
 | `Ui.cs` | 画面操作のラップ（ダイアログ、エラー表示など） |
+| `UpdateService.cs` | 更新確認：公式更新インターフェースに要求し、最新バージョン、ダウンロードアドレス、サポート終了リスト、更新説明を返す（v0.2.0） |
 
 ## ユーティリティクラス（Utils/）
 
@@ -89,7 +92,7 @@ title: モジュールとサービスの概要
 
 ## 画面（Views/）クイックリファレンス
 
-ページとエリアは基本的に一対一で対応：`BeginnerView`（初心者エリア）、`AdvancedView`（上級エリア）、`UninstallerView` + `UninstallerPanel`（プログラムのアンインストール）、`UnlockView` + `UnlockPanel`（占用解除）、`HighRiskView`（高リスクプラグインエリア）、`SettingsView`（設定）、`CreditsView`（スペシャルサンクス）。ダイアログ系：`ChangelogDialog`（更新履歴）、`LicenseDialog`（初回起動時のライセンス契約）、`FluentDialog`。
+ページとエリアは基本的に一対一で対応：`BeginnerView`（初心者エリア）、`AdvancedView`（上級エリア）、`UninstallerView` + `UninstallerPanel`（プログラムのアンインストール）、`UnlockView` + `UnlockPanel`（占用解除）、`HighRiskView`（高リスクプラグインエリア）、`SettingsView`（設定、言語と更新カードを含む）、`CreditsView`（スペシャルサンクス）。ダイアログ系：`ChangelogDialog`（更新履歴）、`LicenseDialog`（初回起動時のライセンス契約）、`FluentDialog`、`UpdateDialog`（新バージョン検出 / サポート終了時の強制更新）、`LanguageManagerDialog`（言語管理）、`LanguagePackDetailsDialog`（言語パック詳細）、`LanguageInstallProgressDialog`（インストール進捗）。
 
 <VTDocTip>
 ソースコードを読むのにおすすめのルート：まず `Views/` で画面のエントリーを見つける → 対応する `Modules/` に飛んでロジックを確認 → 低レベル操作に出会ったら `Utils/` を確認。サービス層（`Services/`）はどこでも出てくるので、通読する必要はありません。

@@ -50,7 +50,8 @@ title: 开发须知
 1. [构建与发布](/dev/build-and-publish.html)：装什么环境、怎么跑起来、怎么打包成单文件；
 2. [项目结构详解](/dev/project-structure.html)：解决方案里三个工程各干什么、主程序内部怎么分层；
 3. [模块与服务速览](/dev/modules-and-services.html)：功能模块、服务、工具类逐个点名；
-4. [高危插件开发](/dev/high-risk-plugin-development.html)：插件契约接口与开发步骤。
+4. [语言包开发](/dev/language-pack-development.html)：`.meowlang` 格式、校验与安装流程、翻译机制、更新接口；
+5. [高危插件开发](/dev/high-risk-plugin-development.html)：插件契约接口与开发步骤。
 
 ## 最后再提醒一遍
 

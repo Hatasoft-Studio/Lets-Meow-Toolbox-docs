@@ -30,13 +30,13 @@ lastUpdated: false
 | ランタイム依存（framework-dependent） | 必要 | 約 10~20 MB | マシンに .NET 8 デスクトップランタイムがインストール済み |
 | 自包含（self-contained） | 不要 | 約 90~110 MB | まっさらなシステムで、ランタイムを追加インストールしたくない場合 |
 
-どちらのモードも単一ファイルの `LetsMeowToolbox.exe` で、`plugins/` ディレクトリが付属し、解凍してすぐ使えます。ページに表示されるファイルサイズは GitHub Release の実際の成果物が基準です。
+どちらのモードも単一ファイルの `LetsMeowToolbox.exe` で、`plugins/`（高リスクプラグイン）と `lang/`（言語パック）ディレクトリが付属し、解凍してすぐ使えます。ページに表示されるファイルサイズは GitHub Release の実際の成果物が基準です。
 
 ## インストールと初回起動
 
 <VTDocSteps>
   <VTDocStep title="ダウンロードして解凍">
-    上のリストから対応バージョンの zip をダウンロードし、解凍して LetsMeowToolbox.exe と plugins ディレクトリを取得します。
+    上のリストから対応バージョンの zip をダウンロードし、解凍して LetsMeowToolbox.exe、plugins、lang ディレクトリを取得します。
   </VTDocStep>
   <VTDocStep title="必要に応じてランタイムをインストール">
     「ポータブル軽量版」を選ぶ場合は、まず .NET 8 デスクトップランタイム（.NET Desktop Runtime 8.x）をインストールしてください。「ポータブル完全版」はランタイムを内蔵しており、このステップはスキップできます。
@@ -85,6 +85,9 @@ lastUpdated: false
   <VTDocAccordion title="高リスクプラグインエリアに内容がない">
     メインプログラム本体には高リスクコードは一切含まれておらず、高リスクプラグインの DLL をプログラムと同じ階層の plugins ディレクトリに入れて初めて読み込まれます。
   </VTDocAccordion>
+  <VTDocAccordion title="繁体字中国語 / 日本語 / 英語の画面に切り替えたい">
+    公式言語パックは v0.2.0 の圧縮パッケージに同梱され、lang ディレクトリに置かれています。「設定」→「言語 / Language」→「言語を選択」を開き、言語を選んで「選択した言語を読み込む」をクリックすると、プログラムが自動的に再起動して反映されます。詳しくは[設定とバージョン情報](/ja/docs/settings.html)をご覧ください。
+  </VTDocAccordion>
 </VTDocAccordionGroup>
 
 ## その他の入手方法
@@ -101,6 +104,9 @@ lastUpdated: false
   </VTDocCard>
   <VTDocCard title=".NET 8 デスクトップランタイム" icon="rocket" href="https://dotnet.microsoft.com/download/dotnet/8.0">
     ランタイム依存バージョンを使用する前に、ここで .NET Desktop Runtime 8.x をダウンロードしてインストールしてください。
+  </VTDocCard>
+  <VTDocCard title="公式言語パック（External Language Pack）" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v1.1.0-lang">
+    繁体字中国語、日本語、英語の言語パックの個別リリースページです。.meowlang をダウンロード後、プログラム内の「言語パックをインストール」で導入できます。メインプログラムの圧縮パッケージと一緒にリリースされる場合は、すでに lang ディレクトリに置かれています。
   </VTDocCard>
 </VTDocCardGroup>
 

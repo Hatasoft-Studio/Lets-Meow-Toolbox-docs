@@ -56,12 +56,15 @@ Services are singleton capabilities spanning the whole program; file names map d
 | `ConfigService.cs` | Configuration reading and writing |
 | `FeatureHost.cs` | Feature host: carries the execution entry points of each feature item |
 | `FluentToast.cs` | Fluent-style toast notifications |
+| `LanguagePackInstaller.cs` | Language pack reading and validation, applicable version checking, version comparison, installation into the `lang` directory and restarting the program (v0.2.0) |
+| `LocalizationService.cs` | Multilingual support: scans the `lang` directory, loads `.meowlang`, translates by source text and walks the visual tree to replace text (v0.2.0) |
 | `LogService.cs` | Global logging (INFO / WARN / ERROR), written to `%LocalAppData%\LetsMeowToolbox\logs` |
 | `OsVersionService.cs` | OS version detection (used for handling Win10 / Win11 differences) |
 | `PluginLoader.cs` | High-risk plugin loader: scans and dynamically loads plugin DLLs under the `plugins/` directory |
 | `SettingsService.cs` | Settings item management |
 | `ThemeService.cs` | Theme switching (light / anime mode, etc.) |
 | `Ui.cs` | UI interaction wrappers (dialogs, error prompts, etc.) |
+| `UpdateService.cs` | Update checking: requests the official update endpoint and returns the latest version, download address, unsupported version list and release notes (v0.2.0) |
 
 ## Utility Classes (Utils/)
 
@@ -89,7 +92,7 @@ Low-level capability wrappers — basically where all the "dirty work" is concen
 
 ## Views (Views/) Quick Reference
 
-Pages correspond one-to-one with zones: `BeginnerView` (Beginner Zone), `AdvancedView` (Advanced Zone), `UninstallerView` + `UninstallerPanel` (Uninstaller), `UnlockView` + `UnlockPanel` (Unlock), `HighRiskView` (High-Risk Plugin Zone), `SettingsView` (Settings), `CreditsView` (Special Thanks). Dialog types: `ChangelogDialog` (changelog), `LicenseDialog` (first-launch license), `FluentDialog`.
+Pages correspond one-to-one with zones: `BeginnerView` (Beginner Zone), `AdvancedView` (Advanced Zone), `UninstallerView` + `UninstallerPanel` (Uninstaller), `UnlockView` + `UnlockPanel` (Unlock), `HighRiskView` (High-Risk Plugin Zone), `SettingsView` (Settings, including the language and update cards), `CreditsView` (Special Thanks). Dialog types: `ChangelogDialog` (changelog), `LicenseDialog` (first-launch license), `FluentDialog`, `UpdateDialog` (new version found / forced update for unsupported versions), `LanguageManagerDialog` (language manager), `LanguagePackDetailsDialog` (language pack details), `LanguageInstallProgressDialog` (installation progress).
 
 <VTDocTip>
 Recommended route for reading the source code: first look at `Views/` to find the UI entry → jump to the corresponding `Modules/` to see the logic → look at `Utils/` when you hit low-level operations. The service layer (`Services/`) shows up everywhere, so there's no need to read it through deliberately.

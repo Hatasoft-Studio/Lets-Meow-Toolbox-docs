@@ -39,11 +39,11 @@ If you just want to use the tool, head over to the [User Guide](/en/docs/getting
 **Mind what GPL-3.0 means**: you are free to use, study, modify and distribute this project, but if you modify its code and redistribute it, your derivative work must also be open sourced under GPL-3.0. Before touching the code, make sure you understand and accept this.
 </VTDocNote>
 
-## Words from the Author (Verbatim)
+## Words from the Author
 
 This is a **Vibe-Coding work**. The author's own words: if you mind using a Vibe-Coding work, please leave on your own — don't open Issues just to curse. Every release of the program is personally tested by the author, so basically no major problems occur.
 
-The author's original intention in making this tool was to quickly configure a fresh system reinstall conveniently — after all, there are too many anti-human designs in today's Win11 (especially the context menu). Later it occurred to the author that there must be many fellow "lazy people", so it was polished up and published. **The author will keep maintaining this project.**
+The author's original intention in making this tool was to quickly configure a PC after reinstalling the system — after all, there are too many anti-human designs in today's Win11 (especially the context menu). Later it occurred to the author that there must be many fellow "lazy people", so it was polished up and published. **The author will keep maintaining this project.**
 
 Also, the author considers themselves no genius — if any expert passing by wants to "rescue" this project, that would be just great.
 
@@ -54,7 +54,8 @@ Read on in order:
 1. [Build and Publish](/en/dev/build-and-publish.html): what environment to install, how to run it, how to package it as a single file;
 2. [Project Structure in Detail](/en/dev/project-structure.html): what each of the three projects in the solution does, and how the main program is layered internally;
 3. [Modules and Services at a Glance](/en/dev/modules-and-services.html): feature modules, services and utility classes named one by one;
-4. [High-Risk Plugin Development](/en/dev/high-risk-plugin-development.html): the plugin contract interfaces and development steps.
+4. [Language Pack Development](/en/dev/language-pack-development.html): the `.meowlang` format, validation and installation flow, translation mechanism, update endpoint;
+5. [High-Risk Plugin Development](/en/dev/high-risk-plugin-development.html): the plugin contract interfaces and development steps.
 
 ## One Last Reminder
 

@@ -28,14 +28,14 @@ git clone https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox.git
 
 然後在 VS 裡打開 `LetsMeowToolbox.sln`，F5 執行 `LetsMeowToolbox.App` 就行。
 
-有一個細節：建置時**高危外掛會自動複製**到主程式輸出目錄的 `plugins` 資料夾，所以偵錯狀態下高危外掛區是直接可用的，不需要你手動搬 DLL。
+有一個細節：建置時**高危外掛會自動複製**到主程式輸出目錄的 `plugins` 資料夾，所以偵錯狀態下高危外掛區是直接可用的，不需要你手動搬 DLL。同理，儲存庫根目錄 `lang/**/*.meowlang` 也會自動複製到輸出目錄的 `lang/`，偵錯時語言管理視窗裡能直接看到官方語言包。
 
 ## 單一檔案發布：兩種模式
 
-程式對外發布的是**單一檔案** `LetsMeowToolbox.exe` + `plugins/` 目錄，分兩種模式。儲存庫 `build/` 目錄下各有一個 PowerShell 腳本，流程都是三步：
+程式對外發布的是**單一檔案** `LetsMeowToolbox.exe` + `plugins/` + `lang/` 目錄，分兩種模式。儲存庫 `build/` 目錄下各有一個 PowerShell 腳本，流程都是三步：
 
 1. 清理舊產物；
-2. `dotnet publish` 發布主程式（單一檔案）；
+2. `dotnet publish` 發布主程式（單一檔案，`lang/` 語言包由 csproj 自動複製進產物）；
 3. 建置高危外掛，並把 `LetsMeowToolbox.Plugins.HighRisk.dll` 複製到產物目錄的 `plugins/`。
 
 ### 模式一：依賴執行階段（小）
@@ -44,7 +44,7 @@ git clone https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox.git
 
 ```powershell
 ./build/publish-framework-dependent.ps1
-# 产物：dist/framework-dependent/LetsMeowToolbox.exe + plugins/
+# 产物：dist/framework-dependent/LetsMeowToolbox.exe + plugins/ + lang/
 ```
 
 腳本內部實際執行的命令：
@@ -60,7 +60,7 @@ dotnet publish src/LetsMeowToolbox.App/LetsMeowToolbox.App.csproj `
 
 ```powershell
 ./build/publish-self-contained.ps1
-# 产物：dist/self-contained/LetsMeowToolbox.exe + plugins/
+# 产物：dist/self-contained/LetsMeowToolbox.exe + plugins/ + lang/
 ```
 
 腳本內部實際執行的命令：
@@ -85,5 +85,5 @@ dotnet publish src/LetsMeowToolbox.App/LetsMeowToolbox.App.csproj `
 - **主程式名是固定的**：`LetsMeowToolbox.exe`，由 csproj 裡的 `AssemblyName=LetsMeowToolbox` 決定，別指望改出別的名；
 - **RID 兜底**：單一檔案發布時如果命令列沒給 RID，csproj 會兜底指定 `win-x64`；
 - **自含模式**會同時開啟 `IncludeNativeLibrariesForSelfExtract`，原生庫一併打進單一檔案；
-- **版本號**在 `LetsMeowToolbox.App.csproj` 的 `Version` 屬性裡維護（當前 0.1.2），發布新版本時別忘了同步更新 `Services/AppInfo.cs` 裡的 `Version` 與 `Changelog`。
+- **版本號**在 `LetsMeowToolbox.App.csproj` 的 `Version` 屬性裡維護（當前 0.2.0），發布新版本時別忘了同步更新 `Services/AppInfo.cs` 裡的 `Version` 與 `Changelog`。
 </VTDocTip>

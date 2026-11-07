@@ -18,6 +18,26 @@ The versioning scheme has been in effect since v0.1.1: **MAJOR.MINOR.PATCH**
 
 Entries below are in reverse chronological order, newest first. For complete code changes, see the **Full Changelog** link of each version.
 
+## v0.2.0 · 2026-11-06
+
+- [New] Multilingual support: added an external language pack mechanism (`.meowlang`, whose content is JSON text); the `lang` folder under the program directory is scanned automatically at startup.
+- [New] Simplified Chinese, as the source language, is embedded directly in the program itself and is usable without installing any language pack.
+- [New] Official language packs: Traditional Chinese, Japanese and English, released with the program in the `lang` folder.
+- [New] The settings page adds a "Select Language" button: a separate window lists all language packs in the `lang` directory, where you can view details and load the selected language (it restarts automatically to take effect).
+- [New] The settings page adds an "Install Language Pack" button: after selecting a `.meowlang` file it shows the pack name, author (official language packs carry a green shield badge), applicable version, install time, language type, language code, file size, description and author website.
+- [New] Installation flow: an installation window with a progress bar; on success it shows "Language pack installed successfully!", on failure it shows the reason and the log path; third-party language packs require a second confirmation.
+- [New] Update/downgrade of a language pack with the same name: version numbers are compared automatically with a second confirmation; if the author or author website differ, overwriting is refused and the old language pack must be deleted manually.
+- [New] Language pack applicable versions support separating multiple version numbers with `|` (e.g. `0.2.0 | 0.2.1 | 0.2.2`).
+- [New] The settings page adds "Check for updates": requests the latest version number from the official update endpoint and compares it automatically with the current version; when a new version exists, it shows the version number, update content and a "Go to the official website for the new version" button.
+- [New] Unsupported version detection: when the unsupported versions list returned by the update endpoint includes the current version, a forced update prompt pops up at startup, and the program cannot be used until you update.
+- [Fixed] In the Language Manager window, language pack names in list items were not displayed, and selected items had no highlight effect.
+
+**Full Changelog**: <https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/compare/v0.1.2...v0.2.0>
+
+<VTDocNote>
+The official language packs (Traditional Chinese, Japanese, English) are also released as a standalone version `v1.1.0-lang`, so users who only want to update the language packs can download the `.meowlang` file separately. For usage docs, see [Settings and About](/en/docs/settings.html); for the language pack format, see [Language Pack Development](/en/dev/language-pack-development.html).
+</VTDocNote>
+
 ## v0.1.2 · 2026-10-24
 
 - [New] All pages got a web-style right scrollbar: it appears automatically when content overflows the window; you can drag the thumb up and down or click the track to page; the thumb turns pink on hover/drag; rounded Win11 style.

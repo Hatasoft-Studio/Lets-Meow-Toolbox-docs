@@ -54,7 +54,8 @@ title: 開發須知
 1. [建置與發布](/zh-hant/dev/build-and-publish.html)：裝什麼環境、怎麼跑起來、怎麼打包成單一檔案；
 2. [項目結構詳解](/zh-hant/dev/project-structure.html)：方案裡三個專案各幹什麼、主程式內部怎麼分層；
 3. [模組與服務速覽](/zh-hant/dev/modules-and-services.html)：功能模組、服務、工具類逐個點名；
-4. [高危外掛開發](/zh-hant/dev/high-risk-plugin-development.html)：外掛契約介面與開發步驟。
+4. [語言包開發](/zh-hant/dev/language-pack-development.html)：`.meowlang` 格式、校驗與安裝流程、翻譯機制、更新介面；
+5. [高危外掛開發](/zh-hant/dev/high-risk-plugin-development.html)：外掛契約介面與開發步驟。
 
 ## 最後再提醒一遍
 

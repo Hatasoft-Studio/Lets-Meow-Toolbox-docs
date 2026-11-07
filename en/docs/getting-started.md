@@ -57,8 +57,18 @@ Some versions also include an extra `.exe` installer (file name contains `instal
 **Installer (exe)**: double-click and follow the wizard, clicking Next all the way.
 
 <VTDocTip>
-After extracting, you'll see a `plugins` folder — that's where high-risk plugins go. The main program itself contains no high-risk code; all high-risk features come from the external plugins in this folder. See [High-Risk Plugin Zone](/en/docs/high-risk-zone.html) for details.
+After extracting, you'll see a `plugins` folder and a `lang` folder: `plugins` holds high-risk plugins, and `lang` holds language packs. The main program itself contains no high-risk code; all high-risk features come from the external plugins in `plugins`. See [High-Risk Plugin Zone](/en/docs/high-risk-zone.html) for details.
 </VTDocTip>
+
+## Step 4: Switch Languages as Needed (Since v0.2.0)
+
+The program defaults to Simplified Chinese. Three official language packs — Traditional Chinese, Japanese and English — ship with the package and are already in the `lang` directory:
+
+1. Open the **Language** card on the Settings page;
+2. Click "Select Language" to open the Language Manager window;
+3. Select the language you want and click "Load Selected Language"; the program confirms and restarts automatically — one restart and it takes effect.
+
+To install a language pack made by someone else, click "Install Language Pack" and pick the `.meowlang` file. See [Settings and About](/en/docs/settings.html) for the detailed flow.
 
 ## What If Double-Clicking Does Nothing
 

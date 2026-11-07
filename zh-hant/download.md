@@ -30,13 +30,13 @@ lastUpdated: false
 | 依賴執行階段（framework-dependent） | 需要 | 約 10~20 MB | 機器上已安裝 .NET 8 桌面執行階段 |
 | 自含（self-contained） | 不需要 | 約 90~110 MB | 全新系統，不想再裝執行庫 |
 
-兩種模式都是單一檔案 `LetsMeowToolbox.exe`，並附帶 `plugins/` 目錄，解壓縮即用。頁面中顯示的檔案大小以 GitHub Release 的實際產物為準。
+兩種模式都是單一檔案 `LetsMeowToolbox.exe`，並附帶 `plugins/`（高危外掛）與 `lang/`（語言包）目錄，解壓縮即用。頁面中顯示的檔案大小以 GitHub Release 的實際產物為準。
 
 ## 安裝與首次執行
 
 <VTDocSteps>
   <VTDocStep title="下載並解壓縮">
-    從上方列表下載對應版本的 zip，解壓縮後得到 LetsMeowToolbox.exe 與 plugins 目錄。
+    從上方列表下載對應版本的 zip，解壓縮後得到 LetsMeowToolbox.exe、plugins 與 lang 目錄。
   </VTDocStep>
   <VTDocStep title="按需安裝執行階段">
     選擇「免安裝精簡版」時，請先安裝 .NET 8 桌面執行階段（.NET Desktop Runtime 8.x）；「免安裝完整版」自帶執行庫，可跳過這一步。
@@ -85,6 +85,9 @@ lastUpdated: false
   <VTDocAccordion title="高危外掛區沒有內容">
     主程式本體不含任何高危代碼，需要將高危外掛 DLL 放入程式同級的 plugins 目錄後才會載入。
   </VTDocAccordion>
+  <VTDocAccordion title="想換繁體中文 / 日語 / 英語介面">
+    官方語言包已隨 v0.2.0 的壓縮包放在 lang 目錄裡。打開「設定」→「語言 / Language」→「選擇語言」，選好語言後點「載入所選語言」，程式會自動重新啟動生效。詳見[設定與關於](/zh-hant/docs/settings.html)。
+  </VTDocAccordion>
 </VTDocAccordionGroup>
 
 ## 其他取得方式
@@ -101,6 +104,9 @@ lastUpdated: false
   </VTDocCard>
   <VTDocCard title=".NET 8 桌面執行階段" icon="rocket" href="https://dotnet.microsoft.com/download/dotnet/8.0">
     使用依賴執行階段版本前，請在此下載並安裝 .NET Desktop Runtime 8.x。
+  </VTDocCard>
+  <VTDocCard title="官方語言包（External Language Pack）" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v1.1.0-lang">
+    繁體中文、日語、英語語言包單獨發布頁，下載 .meowlang 後在程式內「安裝語言包」即可；隨主程式壓縮包發布時則已放在 lang 目錄。
   </VTDocCard>
 </VTDocCardGroup>
 
