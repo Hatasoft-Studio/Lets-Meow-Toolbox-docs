@@ -63,7 +63,7 @@ LetsMeowToolbox/
 | `TargetFramework` | `net8.0-windows` | .NET 8、Windows デスクトップ |
 | `UseWPF` | `true` | WPF アプリ |
 | `AssemblyName` | `LetsMeowToolbox` | メインプログラム名は `LetsMeowToolbox.exe` に固定 |
-| `Version` | `0.2.0` | v0.1.1 からバージョン番号体系を有効化。更新履歴は `Services/AppInfo.cs` を参照 |
+| `Version` | `0.2.1` | v0.1.1 からバージョン番号体系を有効化。更新履歴は `Services/AppInfo.cs` を参照 |
 | `ApplicationManifest` | `app.manifest` | アプリケーションマニフェスト |
 | `AllowUnsafeBlocks` | `true` | unsafe コードブロックを許可 |
 | `PackageReference` | `HandyControl 3.5.1` | 唯一の NuGet 依存。UI コントロールライブラリ |

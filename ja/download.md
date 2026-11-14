@@ -86,7 +86,7 @@ lastUpdated: false
     メインプログラム本体には高リスクコードは一切含まれておらず、高リスクプラグインの DLL をプログラムと同じ階層の plugins ディレクトリに入れて初めて読み込まれます。
   </VTDocAccordion>
   <VTDocAccordion title="繁体字中国語 / 日本語 / 英語の画面に切り替えたい">
-    公式言語パックは v0.2.0 の圧縮パッケージに同梱され、lang ディレクトリに置かれています。「設定」→「言語 / Language」→「言語を選択」を開き、言語を選んで「選択した言語を読み込む」をクリックすると、プログラムが自動的に再起動して反映されます。詳しくは[設定とバージョン情報](/ja/docs/settings.html)をご覧ください。
+    公式言語パックは v0.2.1 の圧縮パッケージに同梱され、lang ディレクトリに置かれています（v1.2.0、v0.2.1 のみ対応）。「設定」→「言語 / Language」→「言語を選択」を開き、言語を選んで「選択した言語を読み込む」をクリックすると、プログラムが自動的に再起動して反映されます。詳しくは[設定とバージョン情報](/ja/docs/settings.html)をご覧ください。
   </VTDocAccordion>
 </VTDocAccordionGroup>
 
@@ -105,8 +105,8 @@ lastUpdated: false
   <VTDocCard title=".NET 8 デスクトップランタイム" icon="rocket" href="https://dotnet.microsoft.com/download/dotnet/8.0">
     ランタイム依存バージョンを使用する前に、ここで .NET Desktop Runtime 8.x をダウンロードしてインストールしてください。
   </VTDocCard>
-  <VTDocCard title="公式言語パック（External Language Pack）" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v1.1.0-lang">
-    繁体字中国語、日本語、英語の言語パックの個別リリースページです。.meowlang をダウンロード後、プログラム内の「言語パックをインストール」で導入できます。メインプログラムの圧縮パッケージと一緒にリリースされる場合は、すでに lang ディレクトリに置かれています。
+  <VTDocCard title="公式言語パック（External Language Pack）" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v0.2.1">
+    公式言語パック v1.2.0 は v0.2.1 の圧縮パッケージに同梱され、lang ディレクトリに置かれています。v0.2.1 のみ対応です。v0.2.0 をまだお使いの方は従来の v1.1.0 言語パックを使用し、混在させないでください。
   </VTDocCard>
 </VTDocCardGroup>
 

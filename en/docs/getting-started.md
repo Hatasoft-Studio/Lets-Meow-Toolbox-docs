@@ -70,6 +70,20 @@ The program defaults to Simplified Chinese. Three official language packs — Tr
 
 To install a language pack made by someone else, click "Install Language Pack" and pick the `.meowlang` file. See [Settings and About](/en/docs/settings.html) for the detailed flow.
 
+<VTDocNote>
+The official language packs shipped with v0.2.1 are **v1.2.0** and only work with v0.2.1; if you are still on v0.2.0, keep using the original v1.1.0 packs.
+</VTDocNote>
+
+## Step 5: Enable Touch Mode on Touch Devices (Since v0.2.1)
+
+If you use a tablet, a touchscreen laptop, or simply find the buttons too small:
+
+1. Open the **Appearance** card on the Settings page;
+2. Turn on **Touch Mode** and confirm once;
+3. Scrollbars become thicker and always visible, and buttons, switches and click areas are enlarged.
+
+The setting is saved automatically and persists across restarts. Note that Touch Mode and "Hide side scrollbars" cannot be enabled at the same time.
+
 ## What If Double-Clicking Does Nothing
 
 Nine times out of ten, you downloaded the "Portable Lite" but your PC has no runtime installed. Pick either fix:

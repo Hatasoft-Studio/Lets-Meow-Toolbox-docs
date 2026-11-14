@@ -30,6 +30,10 @@ The uninstall and cleanup process can be exported as a report, convenient for ar
 
 The scariest thing during uninstall is "the file is locked and can't be deleted". This page is linked with [Unlock](/en/docs/unlock.html) — when you hit a lock issue, you can handle it directly on the Unlock page.
 
+### Independent List Scrolling (since v0.2.1)
+
+Long lists such as the software list and leftover scan results now have their **own scrollbar**: no matter how much content there is, it scrolls inside the list and no longer stretches the whole page; the page's own scrollbar still works as usual.
+
 ## Whose Design It References
 
 The design of the uninstall and leftover scan module references the uninstall registry reading and leftover detection approach of the open source project **Bulk Crap Uninstaller (BCU, GPL-3.0)** — but note that this is an **independent implementation**, not a copy of the code.

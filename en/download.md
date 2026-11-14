@@ -86,7 +86,7 @@ Both modes are a single file `LetsMeowToolbox.exe` accompanied by a `plugins/` (
     The main program itself contains no high-risk code; high-risk plugins are only loaded after you place their DLLs into the plugins directory alongside the program.
   </VTDocAccordion>
   <VTDocAccordion title="I want a Traditional Chinese / Japanese / English interface">
-    The official language packs already ship in the v0.2.0 archive, in the lang directory. Open Settings → "Language" → "Select Language", pick the language and click "Load Selected Language"; the program restarts automatically to apply it. See [Settings and About](/en/docs/settings.html) for details.
+    The official language packs already ship in the v0.2.1 archive, in the lang directory (v1.2.0, only compatible with v0.2.1). Open Settings → "Language" → "Select Language", pick the language and click "Load Selected Language"; the program restarts automatically to apply it. See [Settings and About](/en/docs/settings.html) for details.
   </VTDocAccordion>
 </VTDocAccordionGroup>
 
@@ -105,8 +105,8 @@ Both modes are a single file `LetsMeowToolbox.exe` accompanied by a `plugins/` (
   <VTDocCard title=".NET 8 Desktop Runtime" icon="rocket" href="https://dotnet.microsoft.com/download/dotnet/8.0">
     Before using the framework-dependent version, download and install .NET Desktop Runtime 8.x here.
   </VTDocCard>
-  <VTDocCard title="Official Language Pack (External Language Pack)" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v1.1.0-lang">
-    A separate release page for the Traditional Chinese, Japanese and English language packs; download the .meowlang file and use "Install Language Pack" inside the program. When released together with the main program package, they are already in the lang directory.
+  <VTDocCard title="Official Language Pack (External Language Pack)" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v0.2.1">
+    The v1.2.0 official language packs ship inside the v0.2.1 archive, already in the lang directory, and only support v0.2.1. If you are still on v0.2.0, keep using the original v1.1.0 packs and do not mix them.
   </VTDocCard>
 </VTDocCardGroup>
 

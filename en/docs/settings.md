@@ -18,6 +18,10 @@ Starting with v0.2.0, the program supports **external language packs**. The rule
 - Other languages (Traditional Chinese, Japanese, English, etc.) are stored as `.meowlang` files in the `lang` folder under the program directory, and are scanned automatically at startup;
 - The official language packs (Traditional Chinese, Japanese, English) ship with the program — after extraction they are already in the `lang` directory, no separate download required.
 
+<VTDocNote>
+Since v0.2.1 the official language packs have been upgraded to **v1.2.0**, adding text for touch mode and operation status prompts. v1.2.0 packs **only work with v0.2.1**; if you are still on v0.2.0, do not replace your packs or the program will report an incompatible version.
+</VTDocNote>
+
 The Language card shows "Current language: xxx" and has two buttons below.
 
 ### Select Language
@@ -73,7 +77,7 @@ v0.2.0 added a "Software Updates" card containing a single "Check for updates" b
 After clicking it, the program requests the latest version number, download address, update notes and the "list of unsupported versions" from the official update endpoint (`https://api.lets-meow-toolbox.hatasoft365.top/`), then:
 
 - **New version available**: a dialog shows the current version, latest version, version number and update content, plus a "Go to the official website for the new version" button; if you don't want to update right away, click "Later";
-- **Already up to date**: a message appears right next to the button — "You are already on the latest version (v0.2.0)";
+- **Already up to date**: a message appears right next to the button — "You are already on the latest version (v0.2.1)";
 - **Network failure or endpoint error**: it shows "Check for updates failed: reason"; this does not affect continued use of the program — just try again later.
 
 <VTDocWarning>
@@ -86,6 +90,22 @@ The program ships with multiple theme brushes, including a light theme and **ani
 
 - On non-Win11 systems, the window background may automatically fall back to a solid color; this is expected behavior and does not affect usage;
 - v0.1.1 improved the colors and text readability of switches and buttons in anime mode — if the text looked faint on an older version, upgrading is recommended.
+
+### Touch Mode (since v0.2.1)
+
+The Appearance card adds a **Touch Mode** switch, aimed at touchscreen devices, tablets and users who prefer larger targets:
+
+- When enabled, every page shows a thicker **permanent scrollbar**, so you no longer have to hunt for it on hover;
+- Buttons, switches and click areas are enlarged, with a press-and-release scaling animation;
+- Both enabling and disabling require a **second confirmation** to avoid accidental taps; the setting is saved automatically and persists across restarts.
+
+<VTDocTip>
+Touch Mode and "Hide side scrollbars" are mutually exclusive: hiding wins. If the scrollbar still does not appear after enabling Touch Mode, check whether "Hide side scrollbars" is on.
+</VTDocTip>
+
+### Hide Side Scrollbars
+
+The same card also has "Hide side scrollbars": when enabled, no scrollbars are shown on any page, but the mouse wheel and touch scrolling still work. It cannot be enabled together with Touch Mode.
 
 ## Import / Export Configuration Presets
 
@@ -117,7 +137,7 @@ One-click initialization does **not** delete the language packs you installed �
 
 The About page shows:
 
-- **Current version number** (the versioning scheme was introduced in v0.1.1: MAJOR.MINOR.PATCH; the current version is v0.2.0);
+- **Current version number** (the versioning scheme was introduced in v0.1.1: MAJOR.MINOR.PATCH; the current version is v0.2.1);
 - **"View Changelog" button**: view the update content of each version directly inside the program window;
 - **GitHub repository info and "Go to GitHub Repository" button**: open the official repository <https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox> with one click.
 

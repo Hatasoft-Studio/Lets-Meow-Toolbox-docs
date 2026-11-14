@@ -86,7 +86,7 @@ lastUpdated: false
     主程式本體不含任何高危代碼，需要將高危外掛 DLL 放入程式同級的 plugins 目錄後才會載入。
   </VTDocAccordion>
   <VTDocAccordion title="想換繁體中文 / 日語 / 英語介面">
-    官方語言包已隨 v0.2.0 的壓縮包放在 lang 目錄裡。打開「設定」→「語言 / Language」→「選擇語言」，選好語言後點「載入所選語言」，程式會自動重新啟動生效。詳見[設定與關於](/zh-hant/docs/settings.html)。
+    官方語言包已隨 v0.2.1 的壓縮包放在 lang 目錄裡（v1.2.0，僅支援 v0.2.1）。打開「設定」→「語言 / Language」→「選擇語言」，選好語言後點「載入所選語言」，程式會自動重新啟動生效。詳見[設定與關於](/zh-hant/docs/settings.html)。
   </VTDocAccordion>
 </VTDocAccordionGroup>
 
@@ -105,8 +105,8 @@ lastUpdated: false
   <VTDocCard title=".NET 8 桌面執行階段" icon="rocket" href="https://dotnet.microsoft.com/download/dotnet/8.0">
     使用依賴執行階段版本前，請在此下載並安裝 .NET Desktop Runtime 8.x。
   </VTDocCard>
-  <VTDocCard title="官方語言包（External Language Pack）" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v1.1.0-lang">
-    繁體中文、日語、英語語言包單獨發布頁，下載 .meowlang 後在程式內「安裝語言包」即可；隨主程式壓縮包發布時則已放在 lang 目錄。
+  <VTDocCard title="官方語言包（External Language Pack）" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v0.2.1">
+    官方語言包 v1.2.0 隨 v0.2.1 壓縮包發布，已放在 lang 目錄，僅支援 v0.2.1。仍在用 v0.2.0 的使用者請使用原先的 v1.1.0 語言包，不要混用。
   </VTDocCard>
 </VTDocCardGroup>
 

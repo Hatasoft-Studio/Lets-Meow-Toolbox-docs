@@ -198,7 +198,7 @@ export default withAppDocs(
     lang: 'zh-CN',
     title: "Let's Meow! Toolbox",
     description: '一个二次元现代化 UI、新手友好的 Windows 10 / 11 一体化调优工具箱。',
-    srcExclude: ['README.md', 'README-Program.md'],
+    srcExclude: ['README.md', 'README-Program*.md'],
     head: [
       ['link', { rel: 'icon', type: 'image/png', href: '/app_icon.png' }],
       ['meta', { name: 'theme-color', content: '#ef5757' }],

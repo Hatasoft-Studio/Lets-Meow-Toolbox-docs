@@ -85,5 +85,5 @@ If you don't want to use the scripts, manually execute the two `dotnet publish` 
 - **The main program name is fixed**: `LetsMeowToolbox.exe`, determined by `AssemblyName=LetsMeowToolbox` in the csproj — don't expect to change it to anything else;
 - **RID fallback**: if no RID is given on the command line during single-file publishing, the csproj falls back to `win-x64`;
 - **Self-contained mode** also enables `IncludeNativeLibrariesForSelfExtract`, packing native libraries into the single file as well;
-- **The version number** is maintained in the `Version` property of `LetsMeowToolbox.App.csproj` (currently 0.2.0); when releasing a new version, don't forget to also update `Version` and `Changelog` in `Services/AppInfo.cs` in sync.
+- **The version number** is maintained in the `Version` property of `LetsMeowToolbox.App.csproj` (currently 0.2.1); when releasing a new version, don't forget to also update `Version` and `Changelog` in `Services/AppInfo.cs` in sync.
 </VTDocTip>

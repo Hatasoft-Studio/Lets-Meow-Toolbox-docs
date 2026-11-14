@@ -63,6 +63,7 @@ title: 模組與服務速覽
 | `PluginLoader.cs` | 高危外掛載入器：掃描並動態載入 `plugins/` 目錄下的外掛 DLL |
 | `SettingsService.cs` | 設定項管理 |
 | `ThemeService.cs` | 主題切換（淺色 / 二次元模式等） |
+| `TouchModeService.cs` | 觸控模式：統一放大按鈕、開關與點擊範圍，切換捲軸樣式與可見性，並處理按鈕按壓縮放回饋（v0.2.1） |
 | `Ui.cs` | 介面互動封裝（彈窗、錯誤提示等） |
 | `UpdateService.cs` | 更新檢查：請求官方更新介面，返回最新版本、下載位址、停止支援列表與更新說明（v0.2.0） |
 

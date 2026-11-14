@@ -18,6 +18,20 @@ The versioning scheme has been in effect since v0.1.1: **MAJOR.MINOR.PATCH**
 
 Entries below are in reverse chronological order, newest first. For complete code changes, see the **Full Changelog** link of each version.
 
+## v0.2.1 · 2026-11-14
+
+- [Fixed] High-risk operations now run asynchronously in the background: a processing status is shown and repeated clicks are blocked while they run, fixing the long UI freezes when enabling/restoring.
+- [Fixed] After enabling or restoring Windows Defender, the real state of real-time protection is verified; the program no longer reports success when the change did not actually take effect or was not restored.
+- [New] Independent scrollbars were added to the lists in Uninstaller, residual scanning, preinstalled apps and locking processes, so long lists no longer stretch the whole page.
+- [New] The settings page adds "Touch Mode": when enabled, all pages show a thicker permanent scrollbar, and buttons, switches and click areas are enlarged with stronger press-and-release scaling. Both enabling and disabling require a second confirmation, and the setting is saved automatically.
+- [New] The official language packs were upgraded to v1.2.0, adding text for touch mode and operation status prompts; the new packs only support v0.2.1.
+
+**Full Changelog**: <https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/compare/v0.2.0...v0.2.1>
+
+<VTDocWarning>
+The v1.2.0 official language packs ship with v0.2.1 and **only support v0.2.1**. If you are still on v0.2.0, do not replace your packs with v1.2.0 — the program will report an incompatible version. Upgrade the main program first, or keep the v1.1.0 packs bundled with v0.2.0.
+</VTDocWarning>
+
 ## v0.2.0 · 2026-11-06
 
 - [New] Multilingual support: added an external language pack mechanism (`.meowlang`, whose content is JSON text); the `lang` folder under the program directory is scanned automatically at startup.
@@ -35,7 +49,7 @@ Entries below are in reverse chronological order, newest first. For complete cod
 **Full Changelog**: <https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/compare/v0.1.2...v0.2.0>
 
 <VTDocNote>
-The official language packs (Traditional Chinese, Japanese, English) are also released as a standalone version `v1.1.0-lang`, so users who only want to update the language packs can download the `.meowlang` file separately. For usage docs, see [Settings and About](/en/docs/settings.html); for the language pack format, see [Language Pack Development](/en/dev/language-pack-development.html).
+The official language packs (Traditional Chinese, Japanese, English) were released as a standalone version `v1.1.0-lang` at the time, so users who only wanted to update the language packs could download the `.meowlang` files separately. Since v0.2.1 the official packs have been upgraded to v1.2.0 and ship inside the main program archive; no separate installer is provided anymore. For usage docs, see [Settings and About](/en/docs/settings.html); for the language pack format, see [Language Pack Development](/en/dev/language-pack-development.html).
 </VTDocNote>
 
 ## v0.1.2 · 2026-10-24

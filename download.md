@@ -82,7 +82,7 @@ lastUpdated: false
     主程序本体不含任何高危代码，需要将高危插件 DLL 放入程序同级的 plugins 目录后才会加载。
   </VTDocAccordion>
   <VTDocAccordion title="想换繁体中文 / 日语 / 英语界面">
-    官方语言包已随 v0.2.0 的压缩包放在 lang 目录里。打开「设置」→「语言 / Language」→「选择语言」，选好语言后点「加载所选语言」，程序会自动重启生效。详见[设置与关于](/docs/settings.html)。
+    官方语言包已随 v0.2.1 的压缩包放在 lang 目录里（v1.2.0，仅支持 v0.2.1）。打开「设置」→「语言 / Language」→「选择语言」，选好语言后点「加载所选语言」，程序会自动重启生效。详见[设置与关于](/docs/settings.html)。
   </VTDocAccordion>
 </VTDocAccordionGroup>
 
@@ -101,8 +101,8 @@ lastUpdated: false
   <VTDocCard title=".NET 8 桌面运行时" icon="rocket" href="https://dotnet.microsoft.com/download/dotnet/8.0">
     使用依赖运行时版本前，请在此下载并安装 .NET Desktop Runtime 8.x。
   </VTDocCard>
-  <VTDocCard title="官方语言包（External Language Pack）" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v1.1.0-lang">
-    繁体中文、日语、英语语言包单独发布页，下载 .meowlang 后在程序内「安装语言包」即可；随主程序压缩包发布时则已放在 lang 目录。
+  <VTDocCard title="官方语言包（External Language Pack）" icon="list-check" href="https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/releases/tag/v0.2.1">
+    官方语言包 v1.2.0 随 v0.2.1 压缩包发布，已放在 lang 目录，仅支持 v0.2.1。仍在用 v0.2.0 的用户请使用原先的 v1.1.0 语言包，不要混用。
   </VTDocCard>
 </VTDocCardGroup>
 

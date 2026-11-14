@@ -19,7 +19,7 @@ Features in the program are not thrown together in a pile; they are divided into
 | 📦 Uninstaller | Standalone page | Batch Win32 software uninstall, leftover scan and cleanup, cleanup report export, linked with "Unlock" |
 | 🔓 Unlock | Standalone page | Find locking processes, close programs to release locks, delayed delete on boot |
 | 🔴 High-Risk Plugin Zone | External DLL plugins | Disable Defender / Disable Firewall / Remove Edge·WebView2. The main program itself contains no high-risk code; it only dynamically loads plugin DLLs under the `plugins` directory |
-| ⚙️ Settings | Standalone page | Language pack selection and installation, check for updates, appearance, import/export of configuration presets, log directory, one-click initialize everything, About and changelog |
+| ⚙️ Settings | Standalone page | Language pack selection and installation, check for updates, appearance (including Touch Mode), import/export of configuration presets, log directory, one-click initialize everything, About and changelog |
 | 💖 Special Thanks | Standalone page | Other open source projects integrated into this project |
 
 ## Why It's Divided This Way
@@ -37,6 +37,12 @@ Both capabilities live on the Settings page and don't take up zones of their own
 - **Software Updates**: the Settings page can "Check for updates"; when a new version exists, the version number and update content are shown; if the current version has been officially marked as unsupported, updating is mandatory at startup.
 
 For detailed operations and the language pack format, see [Settings and About](/en/docs/settings.html).
+
+## New in v0.2.1: Touch Mode and Long-List Scrolling
+
+- **Touch Mode**: added to the Appearance card on the Settings page. When enabled, scrollbars become thicker and always visible, buttons, switches and click areas are enlarged, and presses get a scaling rebound — ideal for touchscreens or users who prefer larger targets;
+- **Independent long-list scrolling**: the Uninstaller, leftover scan, preinstalled apps and locking-process lists now have their own scrollbars, so long lists no longer stretch the whole page;
+- **More reliable high-risk operations**: they now run asynchronously, show a processing status and block repeated clicks; after enabling/restoring Defender the real real-time protection state is verified, so false success reports are gone.
 
 ## The Safety Baseline All Zones Follow
 

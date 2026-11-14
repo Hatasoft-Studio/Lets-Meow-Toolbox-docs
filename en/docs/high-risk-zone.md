@@ -50,6 +50,21 @@ Before each operation is enabled, the **risk warning text is shown to you and a 
 - Every operation provides a **restore** capability; if something feels off after enabling, you can restore it;
 - Operation results are written to the log, convenient for tracing.
 
+## Execution and State Verification (since v0.2.1)
+
+v0.2.1 changed how high-risk operations run and how their results are judged:
+
+- **Asynchronous background execution**: after you click enable or restore, the operation runs on a background thread, so the UI no longer freezes for a long time. A processing status is shown while it runs, and the action list is temporarily disabled to block repeated clicks and prevent the same operation from being triggered twice.
+- **The real system state decides success**: when the operation finishes, the program does not just check whether a command returned success — it re-reads the actual system state (for example, `Get-MpComputerStatus` for whether real-time protection is really on/off). Only a state that matches the expectation counts as success; otherwise the failure reason is shown instead of a false success report.
+
+### Defender and Tamper Protection
+
+Windows 11's Tamper Protection is protected by the system and cannot be bypassed by any program. If you try to disable Defender while Tamper Protection is on:
+
+- The policy is written, but real-time protection keeps running, and the program tells you directly that Tamper Protection blocked it;
+- Turn off Tamper Protection manually in "Windows Security → Virus & threat protection → Manage settings", then retry;
+- Restoring works the same way: success is reported only after real-time protection is actually back on; otherwise the program asks you to check Windows Security or system policies.
+
 ## Want to Write Your Own High-Risk Plugin?
 
 The program opens up the plugin contract and allows third parties to develop high-risk plugins (at their own risk). See [High-Risk Plugin Development](/en/dev/high-risk-plugin-development.html) for the development docs.

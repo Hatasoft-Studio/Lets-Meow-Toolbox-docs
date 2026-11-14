@@ -59,6 +59,7 @@ title: 模块与服务速览
 | `PluginLoader.cs` | 高危插件加载器：扫描并动态加载 `plugins/` 目录下的插件 DLL |
 | `SettingsService.cs` | 设置项管理 |
 | `ThemeService.cs` | 主题切换（浅色 / 二次元模式等） |
+| `TouchModeService.cs` | 触控模式：统一放大按钮、开关与点击范围，切换滚动条样式与可见性，并处理按钮按压缩放反馈（v0.2.1） |
 | `Ui.cs` | 界面交互封装（弹窗、错误提示等） |
 | `UpdateService.cs` | 更新检查：请求官方更新接口，返回最新版本、下载地址、停止支持列表与更新说明（v0.2.0） |
 

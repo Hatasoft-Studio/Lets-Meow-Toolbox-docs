@@ -7,4 +7,4 @@
 Lets-Meow-Toolbox的官方文档站
 源项目请前往[https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox](https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox)。
 
-同步自主程序仓库、并已补入 v0.2.0 更新内容的主程序 README：[README-Program.md](./README-Program.md)。
+文档站内容已同步主程序 v0.2.1 的更新说明。

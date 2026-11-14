@@ -59,7 +59,7 @@ LetsMeowToolbox/
 | `TargetFramework` | `net8.0-windows` | .NET 8，Windows 桌面 |
 | `UseWPF` | `true` | WPF 应用 |
 | `AssemblyName` | `LetsMeowToolbox` | 主程序名固定为 `LetsMeowToolbox.exe` |
-| `Version` | `0.2.0` | v0.1.1 起启用版本号体系，更新日志见 `Services/AppInfo.cs` |
+| `Version` | `0.2.1` | v0.1.1 起启用版本号体系，更新日志见 `Services/AppInfo.cs` |
 | `ApplicationManifest` | `app.manifest` | 应用清单 |
 | `AllowUnsafeBlocks` | `true` | 允许 unsafe 代码块 |
 | `PackageReference` | `HandyControl 3.5.1` | 唯一的 NuGet 依赖，UI 控件库 |

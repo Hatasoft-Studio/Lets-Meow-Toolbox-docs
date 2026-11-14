@@ -18,6 +18,20 @@ lastUpdated: false
 
 以下記錄按版本倒序，最新在上。完整代碼變更見各版本的 **Full Changelog** 連結。
 
+## v0.2.1 · 2026-11-14
+
+- 【修復】高風險操作改為在背景非同步執行：執行期間顯示處理狀態並禁止重複點擊，修復啟用 / 還原時介面長時間無回應的問題。
+- 【修復】Windows Defender 啟用與還原後校驗即時防護的真實狀態，未實際生效或未還原時不再誤報成功。
+- 【新增】解除安裝程式、殘留掃描、預裝應用程式、佔用進程等清單新增獨立捲軸，長清單不再撐高整個頁面。
+- 【新增】設定頁面新增「觸控模式」：開啟後所有頁面都會顯示較粗的常駐捲軸，放大按鈕、開關與點擊範圍，並強化按壓縮放的回彈；開啟和關閉均需二次確認，設定會自動儲存。
+- 【新增】官方語言包升級至 v1.2.0，補齊觸控模式與操作狀態提示文案；新版語言包僅支援 v0.2.1。
+
+**Full Changelog**：<https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/compare/v0.2.0...v0.2.1>
+
+<VTDocWarning>
+官方語言包 v1.2.0 隨 v0.2.1 一起發布，**僅支援 v0.2.1**。仍在使用 v0.2.0 的使用者請不要直接替換為 v1.2.0 語言包，否則會提示版本不適用；請先升級主程式，或繼續使用隨 v0.2.0 發布的 v1.1.0 語言包。
+</VTDocWarning>
+
 ## v0.2.0 · 2026-11-06
 
 - 【新增】多語言支援：新增外置語言包機制（`.meowlang`，內容為 JSON 文字），啟動時自動掃描程式目錄下的 `lang` 資料夾。
@@ -35,7 +49,7 @@ lastUpdated: false
 **Full Changelog**：<https://github.com/Hatasoft-Studio/Lets-Meow-Toolbox/compare/v0.1.2...v0.2.0>
 
 <VTDocNote>
-官方語言包（繁體中文、日語、英語）同時也以獨立版本 `v1.1.0-lang` 發布，方便只想更新語言包的使用者單獨下載 `.meowlang` 檔案。使用文件見[設定與關於](/zh-hant/docs/settings.html)，語言包格式見[語言包開發](/zh-hant/dev/language-pack-development.html)。
+官方語言包（繁體中文、日語、英語）當時以獨立版本 `v1.1.0-lang` 發布，方便只想更新語言包的使用者單獨下載 `.meowlang` 檔案。v0.2.1 起官方語言包已升級到 v1.2.0，隨主程式壓縮包發布，不再單獨提供安裝包。使用文件見[設定與關於](/zh-hant/docs/settings.html)，語言包格式見[語言包開發](/zh-hant/dev/language-pack-development.html)。
 </VTDocNote>
 
 ## v0.1.2 · 2026-10-24

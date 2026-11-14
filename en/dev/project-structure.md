@@ -63,7 +63,7 @@ Noteworthy configurations in `LetsMeowToolbox.App.csproj`:
 | `TargetFramework` | `net8.0-windows` | .NET 8, Windows desktop |
 | `UseWPF` | `true` | WPF app |
 | `AssemblyName` | `LetsMeowToolbox` | The main program name is fixed to `LetsMeowToolbox.exe` |
-| `Version` | `0.2.0` | Versioning scheme enabled since v0.1.1; the changelog lives in `Services/AppInfo.cs` |
+| `Version` | `0.2.1` | Versioning scheme enabled since v0.1.1; the changelog lives in `Services/AppInfo.cs` |
 | `ApplicationManifest` | `app.manifest` | Application manifest |
 | `AllowUnsafeBlocks` | `true` | Unsafe code blocks allowed |
 | `PackageReference` | `HandyControl 3.5.1` | The only NuGet dependency, a UI control library |

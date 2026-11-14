@@ -85,5 +85,5 @@ dotnet publish src/LetsMeowToolbox.App/LetsMeowToolbox.App.csproj `
 - **メインプログラム名は固定**：`LetsMeowToolbox.exe`。csproj 内の `AssemblyName=LetsMeowToolbox` で決まっており、別の名前には変更できません。
 - **RID のフォールバック**：単一ファイルリリース時にコマンドラインで RID が指定されていない場合、csproj が `win-x64` をフォールバックで指定します。
 - **自包含モード**では `IncludeNativeLibrariesForSelfExtract` も同時に有効になり、ネイティブライブラリも単一ファイルにまとめられます。
-- **バージョン番号**は `LetsMeowToolbox.App.csproj` の `Version` プロパティで管理（現在 0.2.0）。新バージョンのリリース時には `Services/AppInfo.cs` 内の `Version` と `Changelog` の同期更新を忘れないでください。
+- **バージョン番号**は `LetsMeowToolbox.App.csproj` の `Version` プロパティで管理（現在 0.2.1）。新バージョンのリリース時には `Services/AppInfo.cs` 内の `Version` と `Changelog` の同期更新を忘れないでください。
 </VTDocTip>

@@ -85,5 +85,5 @@ dotnet publish src/LetsMeowToolbox.App/LetsMeowToolbox.App.csproj `
 - **主程式名是固定的**：`LetsMeowToolbox.exe`，由 csproj 裡的 `AssemblyName=LetsMeowToolbox` 決定，別指望改出別的名；
 - **RID 兜底**：單一檔案發布時如果命令列沒給 RID，csproj 會兜底指定 `win-x64`；
 - **自含模式**會同時開啟 `IncludeNativeLibrariesForSelfExtract`，原生庫一併打進單一檔案；
-- **版本號**在 `LetsMeowToolbox.App.csproj` 的 `Version` 屬性裡維護（當前 0.2.0），發布新版本時別忘了同步更新 `Services/AppInfo.cs` 裡的 `Version` 與 `Changelog`。
+- **版本號**在 `LetsMeowToolbox.App.csproj` 的 `Version` 屬性裡維護（當前 0.2.1），發布新版本時別忘了同步更新 `Services/AppInfo.cs` 裡的 `Version` 與 `Changelog`。
 </VTDocTip>

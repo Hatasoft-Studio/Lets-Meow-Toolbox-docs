@@ -44,6 +44,12 @@ This page collects the most frequently encountered issues. A reassuring word fir
   <VTDocAccordion title="The high-risk plugin zone is empty">
     The main program itself contains no high-risk code. To use high-risk features, put the high-risk plugin DLLs into the `plugins` directory alongside the program. See [High-Risk Plugin Zone](/en/docs/high-risk-zone.html) for details.
   </VTDocAccordion>
+  <VTDocAccordion title="The UI seems frozen after clicking enable / restore">
+    Since v0.2.1 high-risk operations run asynchronously in the background: a processing status is shown and repeated clicks are temporarily blocked, so the UI no longer freezes for long periods. If you are on a version older than v0.2.1, this is a known issue — upgrading fixes it. Also, enabling/restoring Defender now verifies the real real-time protection state; if the program says Tamper Protection blocked it, turn Tamper Protection off manually in Windows Security first.
+  </VTDocAccordion>
+  <VTDocAccordion title="Long lists stretch the page / the scrollbar is hard to grab">
+    Since v0.2.1 the Uninstaller, leftover scan, preinstalled apps and locking-process lists have their own scrollbars, so long lists scroll inside the list only. On touch devices, enable **Touch Mode** in Settings → Appearance: scrollbars become thicker and always visible, and buttons and switches are enlarged.
+  </VTDocAccordion>
 </VTDocAccordionGroup>
 
 ## Language and Updates (Since v0.2.0)
@@ -56,7 +62,7 @@ This page collects the most frequently encountered issues. A reassuring word fir
     This is by design. After you click "Load Selected Language" and confirm, the program restarts once so that all interface text is re-translated into the new language; only if the restart fails does it show an error and write to the log.
   </VTDocAccordion>
   <VTDocAccordion title="The language pack won't install and reports that the version doesn't apply">
-    The `appVersion` inside a language pack only allows it to be used on the specified versions, e.g. `0.2.0 | 0.2.1` or `>=0.2.0`. Please switch to a language pack that fits the current version, or upgrade the main program. See [Settings and About](/en/docs/settings.html) for the exact rules.
+    The `appVersion` inside a language pack only allows it to be used on the specified versions, e.g. `0.2.0 | 0.2.1` or `>=0.2.0`. Please switch to a language pack that fits the current version, or upgrade the main program. Note in particular that the official packs shipped with v0.2.1 are **v1.2.0** and only support v0.2.1 — installing them on v0.2.0 reports an incompatible version. See [Settings and About](/en/docs/settings.html) for the exact rules.
   </VTDocAccordion>
   <VTDocAccordion title="It says a language pack with the same name has a different author and can't be installed">
     The program found a language pack with the same ID already in the `lang` directory, but the author or author website differs; to prevent overwriting, the installation is refused. Manually delete the old `.meowlang` file in the `lang` directory and install again.
@@ -79,7 +85,7 @@ This page collects the most frequently encountered issues. A reassuring word fir
     GitHub's servers are overseas, so slow direct connections are normal. Go to the download page and switch the "Download Line" to the EZ-Mirror mirror for acceleration (except for Pre Release versions — the mirror site does not sync pre-release versions).
   </VTDocAccordion>
   <VTDocAccordion title="Can't find the installer version (.exe installer)">
-    Not every version offers an installer. For example, v0.1.1 has an installer-version package, while v0.1.2 and v0.2.0 don't have one for now. What the download page actually lists is authoritative; when there's no installer, use the "Portable Full" — extract and use, and the experience is the same.
+    Not every version offers an installer. For example, v0.1.1 has an installer-version package, while v0.1.2, v0.2.0 and v0.2.1 don't have one for now. What the download page actually lists is authoritative; when there's no installer, use the "Portable Full" — extract and use, and the experience is the same.
   </VTDocAccordion>
 </VTDocAccordionGroup>
 

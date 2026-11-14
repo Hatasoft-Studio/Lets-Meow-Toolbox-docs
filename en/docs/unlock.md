@@ -30,6 +30,10 @@ Some files are truly stubborn and can't be deleted no matter what. This feature 
 
 If you hit "file is locked" while uninstalling software, you can jump straight to this page to handle the lock, then go back and continue cleaning up. The two pages are designed to work together.
 
+## Independent Scrolling for the Process List (since v0.2.1)
+
+When many processes are locking a file, the list now has its own scrollbar and scrolls internally instead of stretching the whole page. With Touch Mode enabled, the scrollbar also becomes thicker and easier to grab.
+
 ## Usage Suggestions
 
 1. First find out **who** is locking on the unlock page — don't just close processes right away; what if it's your unsaved document?

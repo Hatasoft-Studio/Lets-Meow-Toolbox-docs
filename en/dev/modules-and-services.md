@@ -63,6 +63,7 @@ Services are singleton capabilities spanning the whole program; file names map d
 | `PluginLoader.cs` | High-risk plugin loader: scans and dynamically loads plugin DLLs under the `plugins/` directory |
 | `SettingsService.cs` | Settings item management |
 | `ThemeService.cs` | Theme switching (light / anime mode, etc.) |
+| `TouchModeService.cs` | Touch Mode: uniformly enlarges buttons, switches and click areas, switches scrollbar style and visibility, and handles press-and-release scaling feedback (v0.2.1) |
 | `Ui.cs` | UI interaction wrappers (dialogs, error prompts, etc.) |
 | `UpdateService.cs` | Update checking: requests the official update endpoint and returns the latest version, download address, unsupported version list and release notes (v0.2.0) |
 
